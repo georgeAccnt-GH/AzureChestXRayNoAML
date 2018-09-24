@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>001_get_data</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>000_preprocess</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11775,7 +11775,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Copies-data-from-blob-to-local-host">Copies data from blob to local host<a class="anchor-link" href="#Copies-data-from-blob-to-local-host">&#182;</a></h2><h5 id="Copyright-(C)-Microsoft-Corporation.">Copyright (C) Microsoft Corporation.<a class="anchor-link" href="#Copyright-(C)-Microsoft-Corporation.">&#182;</a></h5><p>see license file for details</p>
+<h2 id="Data-preprocessing">Data preprocessing<a class="anchor-link" href="#Data-preprocessing">&#182;</a></h2><h5 id="Copyright-(C)-Microsoft-Corporation.">Copyright (C) Microsoft Corporation.<a class="anchor-link" href="#Copyright-(C)-Microsoft-Corporation.">&#182;</a></h5><p>see license file for details</p>
 
 </div>
 </div>
@@ -11786,7 +11786,6 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Allow multiple displays per cell</span>
-
 <span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="k">import</span> <span class="n">InteractiveShell</span>
 <span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
 </pre></div>
@@ -11821,7 +11820,7 @@ div#notebook {
 <span class="k">try</span><span class="p">:</span>
     <span class="n">amlWBSharedDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;AZUREML_NATIVE_SHARE_DIRECTORY&#39;</span><span class="p">]</span>    
 <span class="k">except</span><span class="p">:</span>
-    <span class="n">amlWBSharedDir</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">amlWBSharedDir</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;..&#39;</span><span class="p">])))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;not using AML Workbench?&#39;</span><span class="p">)</span>
     
 <span class="n">amlWBSharedDir</span>
@@ -11854,7 +11853,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code&#39;</pre>
+<pre>&#39;/local_dir/code/02_Model/..&#39;</pre>
 </div>
 
 </div>
@@ -11869,7 +11868,6 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use the Azure Machine Learning data collector to log various metrics</span>
-
 <span class="c1"># from azureml.logging import get_azureml_logger</span>
 <span class="c1"># logger = get_azureml_logger()</span>
 </pre></div>
@@ -11896,16 +11894,17 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import utlity functions</span>
 
 <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
-<span class="n">paths_to_append</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;src&#39;</span><span class="p">])))]</span>
+<span class="n">paths_to_append</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;src&#39;</span><span class="p">])))]</span>
 <span class="k">def</span> <span class="nf">add_path_to_sys_path</span><span class="p">(</span><span class="n">path_to_append</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="n">path_to_append</span> <span class="ow">in</span> <span class="n">paths</span> <span class="k">for</span> <span class="n">paths</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)):</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_to_append</span><span class="p">)</span>
+
 <span class="p">[</span><span class="n">add_path_to_sys_path</span><span class="p">(</span><span class="n">crt_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">crt_path</span> <span class="ow">in</span> <span class="n">paths_to_append</span><span class="p">]</span>
 
 <span class="kn">import</span> <span class="nn">azure_chestxray_utils</span>
@@ -11921,7 +11920,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -11936,134 +11935,29 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create the file path variables </span>
-<span class="c1"># create nih_chest_xray_data_dir (in container dir mapped to a host dir for data persistence), </span>
-<span class="c1"># where data will be copied from blob</span>
-
-<span class="n">prj_consts</span> <span class="o">=</span> <span class="n">azure_chestxray_utils</span><span class="o">.</span><span class="n">chestxray_consts</span><span class="p">()</span>
-
-<span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-
-
-<span class="n">data_base_input_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;..&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_INPUT_DIR_list</span><span class="p">)))</span>
-<span class="n">credential_info_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">CREDENTIALS_DIR_list</span><span class="p">)))</span>
-<span class="n">nih_chest_xray_data_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_base_input_dir</span><span class="p">,</span> 
-                                     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">ChestXray_IMAGES_DIR_list</span><span class="p">)))</span>
-
-<span class="o">!</span>mkdir -p <span class="o">{</span>data_base_input_dir<span class="o">}</span>
-<span class="o">!</span>mkdir -p <span class="o">{</span>credential_info_path<span class="o">}</span>  
-<span class="o">!</span>mkdir -p <span class="o">{</span>nih_chest_xray_data_dir<span class="o">}</span>
-
-<span class="n">data_base_input_dir</span>
-<span class="n">credential_info_path</span>
-<span class="n">nih_chest_xray_data_dir</span>
-</pre></div>
-
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Path-variables">Path variables<a class="anchor-link" href="#Path-variables">&#182;</a></h4>
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/../chestxray/data/ChestX-ray8&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/notShared&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/../chestxray/data/ChestX-ray8/ChestXray-NIHCC&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create this function in file &#39;{credential_info_path}/get_data_access_secrets.py&#39;</span>
-<span class="c1"># def get_blob_credentials():</span>
-<span class="c1">#     dataBlob = &#39;https://somedatastore.blob.core.windows.net/somecontainer&#39;</span>
-<span class="c1">#     sourceKey = &#39;somesourceKey&#39;</span>
-<span class="c1">#     return dataBlob, sourceKey</span>
-<span class="c1"># </span>
-<span class="c1"># For example:</span>
-<span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">CredentialsFileName</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">credential_info_path</span><span class="p">,</span> <span class="s1">&#39;get_data_access_secrets.py&#39;</span><span class="p">)</span> 
-    <span class="n">crt_container</span> <span class="o">=</span> <span class="s1">&#39;https://somedatastore.blob.core.windows.net/somecontainer&#39;</span>
-    <span class="n">crt_container</span> <span class="o">=</span> <span class="s1">&#39;https://ghiordanchestxrbait02sa.blob.core.windows.net:443/chestxraydata&#39;</span>
-    <span class="n">crt_source_Key</span> <span class="o">=</span> <span class="s1">&#39;QAMVc1skSmsovoYyycyeP4Oq4pzhwHEIVMqFsuIMg6TbF0LcnRYBsPCPPyHGmhaRrhlruhACO+DWJuzZTOmctg==&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create base directories for the file path variables </span>
+<span class="c1"># paths are tipically container level dirs mapped to a host dir for data persistence.</span>
 
-    <span class="kn">import</span> <span class="nn">os.path</span> 
+<span class="n">prj_consts</span> <span class="o">=</span> <span class="n">azure_chestxray_utils</span><span class="o">.</span><span class="n">chestxray_consts</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">CredentialsFileName</span><span class="p">):</span> 
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Credentials file not found, will be written!&#39;</span><span class="p">)</span> 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">CredentialsFileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">myFile</span><span class="p">:</span>
-            <span class="n">myFile</span><span class="o">.</span><span class="n">write</span><span class="p">((</span><span class="s2">&quot;def get_blob_credentials():</span><span class="se">\n\t</span><span class="s2">&quot;</span> <span class="o">+</span>
-            <span class="s2">&quot;dataBlob = &#39;&quot;</span> <span class="o">+</span> <span class="n">crt_container</span> <span class="o">+</span> <span class="s2">&quot;&#39;</span><span class="se">\n\t</span><span class="s2">&quot;</span> <span class="o">+</span>
-            <span class="s2">&quot;sourceKey = &#39;&quot;</span> <span class="o">+</span> <span class="n">crt_source_Key</span> <span class="o">+</span> <span class="s2">&quot;&#39;</span><span class="se">\n\t</span><span class="s2">&quot;</span> <span class="o">+</span>
-            <span class="s2">&quot;return dataBlob, sourceKey</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">))</span> 
-        <span class="nb">print</span><span class="p">((</span><span class="s1">&#39;Credentials file written at &#39;</span> <span class="o">+</span><span class="n">CredentialsFileName</span><span class="p">))</span> 
-    <span class="k">else</span><span class="p">:</span> 
-        <span class="nb">print</span><span class="p">((</span><span class="s1">&#39;Credentials file found at &#39;</span> <span class="o">+</span> <span class="n">CredentialsFileName</span><span class="p">))</span>
-    
-<span class="c1"># check CredentialsFileName existence and print content if needed</span>
+<span class="n">data_base_input_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;..&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_INPUT_DIR_list</span><span class="p">)))</span>
+<span class="n">data_base_output_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;..&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_OUTPUT_DIR_list</span><span class="p">)))</span>  
 
-<span class="n">credentials_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="n">credential_info_path</span><span class="p">,</span> <span class="s1">&#39;get_data_access_secrets.py&#39;</span><span class="p">]))</span>
-<span class="n">credentials_file_name</span>
-<span class="c1"># !cat {credentials_file_name}</span>
+<span class="n">data_base_input_dir</span>
+<span class="n">data_base_output_dir</span>
 </pre></div>
 
 </div>
@@ -12082,7 +11976,20 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/notShared/get_data_access_secrets.py&#39;</pre>
+<pre>&#39;/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8&#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/local_dir/code/02_Model/../../chestxray/output&#39;</pre>
 </div>
 
 </div>
@@ -12096,13 +12003,14 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># read credentials info</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># chest xray images are in nih_chest_xray_data_dir</span>
+<span class="n">nih_chest_xray_data_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_base_input_dir</span><span class="p">,</span> 
+                                     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">ChestXray_IMAGES_DIR_list</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">])))</span>
+<span class="n">nih_chest_xray_data_dir</span>
 
-<span class="n">add_path_to_sys_path</span><span class="p">(</span><span class="n">credential_info_path</span><span class="p">)</span>         
-<span class="kn">import</span> <span class="nn">get_data_access_secrets</span>   
-<span class="n">crt_container</span><span class="p">,</span> <span class="n">crt_key</span> <span class="o">=</span> <span class="n">get_data_access_secrets</span><span class="o">.</span><span class="n">get_blob_credentials</span><span class="p">()</span>
-<span class="n">crt_container</span>
-<span class="n">crt_key</span>
+<span class="c1"># check if we have all 112120 images in nih_chest_xray_data_dir</span>
+<span class="n">orig_images_no</span> <span class="o">=</span> <span class="o">!</span>find <span class="nv">$nih_chest_xray_data_dir</span> -type f <span class="p">|</span> wc -l
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;orig images number:</span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">orig_images_no</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12121,148 +12029,44 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;https://ghiordanchestxrbait02sa.blob.core.windows.net:443/chestxraydata&#39;</pre>
+<pre>&#39;/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/images&#39;</pre>
 </div>
 
 </div>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;QAMVc1skSmsovoYyycyeP4Oq4pzhwHEIVMqFsuIMg6TbF0LcnRYBsPCPPyHGmhaRrhlruhACO+DWJuzZTOmctg==&#39;</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>orig images number:[&#39;112120&#39;] 
+</pre>
 </div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#check azcopy is available. Uncomment second line to print _response_ if needed</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="o">!</span>azcopy
-<span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[10]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;azcopy 7.1.0-netcorepreview Copyright (c) 2017 Microsoft Corp. All Rights Reserved.&#39;,
- &#39;------------------------------------------------------------------------------&#39;,
- &#39;# azcopy is designed for high-performance uploading, downloading, and copying&#39;,
- &#39;data to and from Microsoft Azure Blob, and File storage.&#39;,
- &#39;&#39;,
- &#39;# Command Line Usage:&#39;,
- &#39;    azcopy --source &lt;source&gt; --destination &lt;destination&gt; [options]&#39;,
- &#39;&#39;,
- &#39;# Options:&#39;]</pre>
-</div>
-
 </div>
 
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nih_chest_xray_data_dir</span><span class="p">,</span> <span class="s1">&#39;tmp&#39;</span><span class="p">)</span>
-<span class="n">tmp_dir</span>
-<span class="o">!</span>mkdir - p <span class="nv">$tmp_dir</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[11]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># copy data to local host dir</span>
-<span class="c1"># add {  --source-key {crt_key}  } if needed</span>
-
-<span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nih_chest_xray_data_dir</span><span class="p">,</span> <span class="s1">&#39;tmp&#39;</span><span class="p">)</span>
-
-<span class="n">answer</span> <span class="o">=</span> <span class="o">!</span>yes <span class="p">|</span> azcopy --quiet <span class="err">\</span>
-    <span class="o">--</span><span class="n">source</span> <span class="p">{</span><span class="n">crt_container</span><span class="p">}</span>  \
-    <span class="o">--</span><span class="n">destination</span> <span class="p">{</span><span class="n">tmp_dir</span><span class="p">}</span> \
-    <span class="o">--</span><span class="n">source</span><span class="o">-</span><span class="n">key</span> <span class="p">{</span><span class="n">crt_key</span><span class="p">}</span> \
-    <span class="o">--</span><span class="n">recursive</span> \
-    <span class="o">--</span><span class="n">verbose</span> \
-    <span class="o">--</span><span class="n">include</span> <span class="s2">&quot;images_&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The above cell will take about 20 minutes to run. While it runs, you can monitor the progress by ssh-ing 
- into your compute context machine and running:<br>
- find /datadrive01/amlwbShare/current_exp_account/current_workspace/current_exp/chestxray/data/ChestX-ray8/ChestXray-NIHCC/ -type f | wc -l</p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">:]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check if we have patients file list Data_Entry_2017.csv and BBox_List_2017.csv (https://nihcc.app.box.com/v/ChestXray-NIHCC)</span>
+<span class="c1"># blacklist.csv is genrated by data scientists with no medical background</span>
+
+<span class="n">other_data_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nih_chest_xray_data_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">])))</span>
+
+<span class="n">other_data_dir</span>
+
+<span class="o">!</span>ls <span class="nv">$other_data_dir</span>/*.csv
+
+<span class="c1"># data is split into train/test/validation partitions</span>
+<span class="n">data_partitions_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_base_output_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">DATA_PARTITIONS_DIR_list</span><span class="p">)))</span>  
+<span class="n">data_partitions_dir</span>
+<span class="o">!</span>mkdir -p <span class="o">{</span>data_partitions_dir<span class="o">}</span>
 </pre></div>
 
 </div>
@@ -12281,13 +12085,33 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;[2018/09/24 02:52:14] Transfer summary:&#39;,
- &#39;-----------------&#39;,
- &#39;Total files transferred: 12&#39;,
- &#39;Transfer successfully:   4&#39;,
- &#39;Transfer skipped:        0&#39;,
- &#39;Transfer failed:         8&#39;,
- &#39;Elapsed time:            00.00:16:07&#39;]</pre>
+<pre>&#39;/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/images/../..&#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/images/../../BBox_List_2017.csv
+/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/images/../../Data_Entry_2017.csv
+/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/images/../../blacklist.csv
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/local_dir/code/02_Model/../../chestxray/output/data_partitions&#39;</pre>
 </div>
 
 </div>
@@ -12301,69 +12125,74 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nih_chest_xray_data_dir</span>
-<span class="o">!</span>ls -l <span class="nv">$tmp_dir</span>
-<span class="c1"># !find $nih_chest_xray_data_dir -type f | wc -l</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">tqdm</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">sklearn.model_selection</span> 
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[14]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/../chestxray/data/ChestX-ray8/ChestXray-NIHCC&#39;</pre>
 </div>
-
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>total 28835536
--rw-r--r-- 1 keras users  226840150 Sep 24 02:36 images_001.tar.gz
--rw-r--r-- 1 keras users  226610774 Sep 24 02:36 images_002.tar.gz
--rw-r--r-- 1 keras users  289443414 Sep 24 02:36 images_003.tar.gz
--rw-r--r-- 1 keras users 3838903983 Sep 24 02:37 images_004.tar.gz
--rw-r--r-- 1 keras users 3935496531 Sep 24 02:37 images_005.tar.gz
--rw-r--r-- 1 keras users 3986301172 Sep 24 02:37 images_006.tar.gz
--rw-r--r-- 1 keras users 4016328426 Sep 24 02:37 images_007.tar.gz
--rw-r--r-- 1 keras users 4018347353 Sep 24 02:37 images_008.tar.gz
--rw-r--r-- 1 keras users 4111327929 Sep 24 02:37 images_009.tar.gz
--rw-r--r-- 1 keras users 4181556296 Sep 24 02:37 images_010.tar.gz
--rw-r--r-- 1 keras users 4187084020 Sep 24 02:37 images_011.tar.gz
--rw-r--r-- 1 keras users 2914187733 Sep 24 02:37 images_012.tar.gz
-</pre>
-</div>
-</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Train/Validation/Test-Data-partitioning">Train/Validation/Test Data partitioning<a class="anchor-link" href="#Train/Validation/Test-Data-partitioning">&#182;</a></h4><ul>
+<li>remove the images in the blacklist.csv where the image has low quality. </li>
+<li>remove the NIH bounding box patients since we will save those patients for later validation use. </li>
+<li>We will also divide data into train/valid/test dataset using a 7:1:2 ratio.</li>
+</ul>
 
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">echo</span> ls -l <span class="nv">$nih_chest_xray_data_dir</span>
-<span class="o">!</span><span class="nb">cd</span> <span class="nv">$nih_chest_xray_data_dir</span>
-<span class="c1"># ! ls -l $nih_chest_xray_data_dir/*.tar.gz </span>
-<span class="c1"># ! cat $nih_chest_xray_data_dir/*.tar.gz | tar -zxvf - -i</span>
-<span class="o">!</span><span class="k">for</span> file in <span class="nv">$tmp_dir</span>/*.tar.gz<span class="p">;</span> <span class="k">do</span> tar -zxf <span class="nv">$file</span><span class="p">;</span> <span class="k">done</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># remove NIH manually annotated data (groung truth with heavy pathologies, no healthy patients) </span>
+<span class="c1"># exclude what visusally looks like bad images to data scientists with no medical background</span>
+<span class="c1"># todo</span>
+<span class="c1"># This should prob be a generic function</span>
+
+
+<span class="n">total_patient_number</span> <span class="o">=</span> <span class="mi">30805</span>
+<span class="n">NIH_annotated_file</span> <span class="o">=</span> <span class="s1">&#39;BBox_List_2017.csv&#39;</span> <span class="c1"># exclude from train pathology annotated by radiologists </span>
+<span class="n">manually_selected_bad_images_file</span> <span class="o">=</span> <span class="s1">&#39;blacklist.csv&#39;</span><span class="c1"># exclude what viusally looks like bad images</span>
+
+<span class="n">patient_id_original</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">total_patient_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+
+<span class="c1"># ignored images list is used later, since this is not a patient ID level issue</span>
+<span class="n">ignored_images_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">other_data_dir</span><span class="p">,</span> <span class="n">manually_selected_bad_images_file</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># delete the last char which is \n</span>
+        <span class="n">ignored_images_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">9</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">30805</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">bbox_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">other_data_dir</span><span class="p">,</span> <span class="n">NIH_annotated_file</span><span class="p">))</span>
+<span class="n">bbox_patient_index_df</span> <span class="o">=</span> <span class="n">bbox_df</span><span class="p">[</span><span class="s1">&#39;Image Index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="n">bbox_patient_index_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">bbox_patient_index_df</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="n">bbox_patient_index_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+
+<span class="n">patient_id</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">patient_id_original</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">bbox_patient_index_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;len of original patient id is&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">patient_id_original</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;len of cleaned patient id is&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">patient_id</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;len of unique patient id with annotated data&quot;</span><span class="p">,</span> 
+      <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">bbox_patient_index_list</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;len of patient id with annotated data&quot;</span><span class="p">,</span><span class="n">bbox_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12380,11 +12209,10 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>ls -l /local_dir/code/../chestxray/data/ChestX-ray8/ChestXray-NIHCC
-tar (child): /*.tar.gz: Cannot open: No such file or directory
-tar (child): Error is not recoverable: exiting now
-tar: Child returned status 2
-tar: Error is not recoverable: exiting now
+<pre>len of original patient id is 30805
+len of cleaned patient id is 30079
+len of unique patient id with annotated data 726
+len of patient id with annotated data 984
 </pre>
 </div>
 </div>
@@ -12398,11 +12226,270 @@ tar: Error is not recoverable: exiting now
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  run below command in amlwb cli to save current sessin as html</span>
-<span class="c1"># jupyter nbconvert --to html .\Code\01_DataPrep\001_get_data.ipynb</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">patient_id</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first ten patient ids are&quot;</span><span class="p">,</span> <span class="n">patient_id</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># training:valid:test=7:1:2</span>
+<span class="n">patient_id_train</span> <span class="o">=</span> <span class="n">patient_id</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="n">total_patient_number</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">)]</span>
+<span class="n">patient_id_valid</span> <span class="o">=</span> <span class="n">patient_id</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">total_patient_number</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">):</span><span class="nb">int</span><span class="p">(</span><span class="n">total_patient_number</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)]</span>
+<span class="c1"># get the rest of the patient_id as the test set</span>
+<span class="n">patient_id_test</span> <span class="o">=</span> <span class="n">patient_id</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">total_patient_number</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">):]</span>
+<span class="n">patient_id_test</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">bbox_patient_index_list</span><span class="p">)</span>
+<span class="n">patient_id_test</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">patient_id_test</span><span class="p">))</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;train:</span><span class="si">{}</span><span class="s2"> valid:</span><span class="si">{}</span><span class="s2"> test:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">patient_id_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">patient_id_valid</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">patient_id_test</span><span class="p">)))</span>
+
+<span class="c1"># test_set = test_set+left_out_patient_id</span>
+<span class="c1"># print(&quot;train:{} valid:{} test:{}&quot;.format(len(train_set), len(valid_set), len(test_set)))</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>first ten patient ids are [24303, 16035, 4967, 28624, 5378, 20335, 17069, 12271, 16975, 4469]
+train:21563 valid:3081 test:6161
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Add a few more project constants</span>
+
+<span class="n">pathologies_name_list</span> <span class="o">=</span> <span class="n">prj_consts</span><span class="o">.</span><span class="n">DISEASE_list</span>
+<span class="n">NIH_patients_and_labels_file</span> <span class="o">=</span> <span class="s1">&#39;Data_Entry_2017.csv&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Finally-do-preprocessing">Finally do preprocessing<a class="anchor-link" href="#Finally-do-preprocessing">&#182;</a></h4><p>Save labels and partitions</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">labels_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">other_data_dir</span><span class="p">,</span> <span class="n">NIH_patients_and_labels_file</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">current_df</span><span class="p">,</span> <span class="n">patient_ids</span><span class="p">):</span>
+    <span class="n">image_name_index</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">image_labels</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">individual_patient</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">patient_ids</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">current_df</span><span class="p">[</span><span class="n">current_df</span><span class="p">[</span><span class="s1">&#39;Patient ID&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">individual_patient</span><span class="p">]</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">processed_image_name</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Image Index&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">processed_image_name</span> <span class="ow">in</span> <span class="n">ignored_images_set</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">image_name_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">processed_image_name</span><span class="p">)</span>
+                <span class="n">image_labels</span><span class="p">[</span><span class="n">processed_image_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">disease_index</span><span class="p">,</span> <span class="n">ele</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pathologies_name_list</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">ele</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Finding Labels&#39;</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
+                        <span class="n">image_labels</span><span class="p">[</span><span class="n">processed_image_name</span><span class="p">][</span><span class="n">disease_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># redundant code but just to make it more readable</span>
+                        <span class="n">image_labels</span><span class="p">[</span><span class="n">processed_image_name</span><span class="p">][</span><span class="n">disease_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="c1"># print(&quot;processed&quot;, row[&#39;Image Index&#39;])</span>
+    <span class="k">return</span> <span class="n">image_name_index</span><span class="p">,</span> <span class="n">image_labels</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># # create and save train/test/validation partitions list</span>
+
+<span class="n">train_data_index</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span><span class="n">labels_df</span><span class="p">,</span> <span class="n">patient_id_train</span><span class="p">)</span>
+<span class="n">valid_data_index</span><span class="p">,</span> <span class="n">valid_labels</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span><span class="n">labels_df</span><span class="p">,</span> <span class="n">patient_id_valid</span><span class="p">)</span>
+<span class="n">test_data_index</span><span class="p">,</span> <span class="n">test_labels</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span><span class="n">labels_df</span><span class="p">,</span> <span class="n">patient_id_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;train, valid, test image number is:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_data_index</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_data_index</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data_index</span><span class="p">))</span>
+
+<span class="c1"># save the data</span>
+<span class="n">labels_all</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">labels_all</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">train_labels</span><span class="p">)</span>
+<span class="n">labels_all</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">valid_labels</span><span class="p">)</span>
+<span class="n">labels_all</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">test_labels</span><span class="p">)</span>
+
+<span class="n">partition_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train&#39;</span><span class="p">:</span> <span class="n">train_data_index</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="n">test_data_index</span><span class="p">,</span> <span class="s1">&#39;valid&#39;</span><span class="p">:</span> <span class="n">valid_data_index</span><span class="p">}</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_partitions_dir</span><span class="p">,</span><span class="s1">&#39;labels14_unormalized_cleaned.pickle&#39;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">labels_all</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_partitions_dir</span><span class="p">,</span><span class="s1">&#39;partition14_unormalized_cleaned.pickle&#39;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">partition_dict</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    
+<span class="c1"># also save the patient id partitions for pytorch training    </span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_partitions_dir</span><span class="p">,</span><span class="s1">&#39;train_test_valid_data_partitions.pickle&#39;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">([</span><span class="n">patient_id_train</span><span class="p">,</span><span class="n">patient_id_valid</span><span class="p">,</span>
+                 <span class="n">patient_id_test</span><span class="p">,</span>
+                <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">bbox_patient_index_list</span><span class="p">))],</span> <span class="n">f</span><span class="p">)</span>    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 21563/21563 [00:32&lt;00:00, 657.29it/s]
+100%|██████████| 3081/3081 [00:04&lt;00:00, 674.78it/s]
+100%|██████████| 6161/6161 [00:12&lt;00:00, 495.70it/s]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>train, valid, test image number is: 68508 9495 32893
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sanity check, see train labels</span>
+
+<span class="nb">type</span><span class="p">(</span><span class="n">train_labels</span><span class="p">)</span>
+<span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">train_labels</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">train_labels</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>dict</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;00024303_000.png&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint8),
+ &#39;00016035_000.png&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint8),
+ &#39;00016035_001.png&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint8),
+ &#39;00004967_000.png&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint8),
+ &#39;00004967_001.png&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint8)}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter nbconvert --to html 000_preprocess.ipynb
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[NbConvertApp] Converting notebook 000_preprocess.ipynb to html
+[NbConvertApp] Writing 290381 bytes to 000_preprocess.html
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 

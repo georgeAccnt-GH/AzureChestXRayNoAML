@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>00_create_docker_image</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>010_train</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11771,9 +11771,18 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Train">Train<a class="anchor-link" href="#Train">&#182;</a></h2><h5 id="Copyright-(C)-Microsoft-Corporation.">Copyright (C) Microsoft Corporation.<a class="anchor-link" href="#Copyright-(C)-Microsoft-Corporation.">&#182;</a></h5><p>see license file for details</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Allow multiple displays per cell</span>
@@ -11788,10 +11797,33 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> dotenv
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># AZUREML_NATIVE_SHARE_DIRECTORY mapping to host dir is set by _nativeSharedDirectory_ in .compute file </span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">amlWBSharedDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;AZUREML_NATIVE_SHARE_DIRECTORY&#39;</span><span class="p">]</span>    
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">amlWBSharedDir</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;..&#39;</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;not using AML Workbench?&#39;</span><span class="p">)</span>
+    
+<span class="n">amlWBSharedDir</span>
 </pre></div>
 
 </div>
@@ -11808,287 +11840,20 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>The dotenv extension is already loaded. To reload it, use:
-  %reload_ext dotenv
+<pre>not using AML Workbench?
 </pre>
 </div>
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pwd
-<span class="o">!</span>ls -l ./
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
 <div class="output_area">
 
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>/mnt/datadrive01/prj/AzureChestXRayNoAML/code
-total 3232
--rwxrwxrwx 1 loginVM_001 loginVM_001  401244 Sep 24 01:38 00_create_docker_image.html
--rwxrwxrwx 1 loginVM_001 loginVM_001 2621340 Sep 24 05:20 00_create_docker_image.ipynb
-drwxrwxrwx 3 loginVM_001 loginVM_001    4096 Sep 24 05:12 01_DataPrep
-drwxrwxrwx 3 loginVM_001 loginVM_001    4096 Sep 24 05:18 02_Model
-drwxrwxrwx 2 loginVM_001 loginVM_001    4096 Sep 24 04:24 03_Deployment
--rwxrwxrwx 1        1000 users        255403 Sep 23 23:56 edit_python_files.html
--rwxrwxrwx 1        1000 users          6602 Sep 23 23:58 edit_python_files.ipynb
-drwxrwxrwx 3        1000 users          4096 Sep 24 02:07 notShared
-drwxrwxrwx 3 loginVM_001 loginVM_001    4096 Sep 23 23:10 src
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">writefile</span> .env
-# This cell is tagged `parameters`
-# Please modify the values below as you see fit
-
-# Your docker login and image repository name
-docker_login = &#39;georgedockeraccount&#39;
-image_tag = &quot;/chestxray-no-aml-gpu&quot;
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Overwriting .env
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">writefile</span> ./../docker/dockerfile
-
-FROM nvidia/cuda:9.0-cudnn7-devel
-#FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
-
-MAINTAINER George Iordanescu &lt;ghiordan@microsoft.com&gt;
-#based on https://github.com/keras-team/keras/blob/master/docker/Dockerfile
-
-# Install system packages
-RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends \
-      apt-utils \
-      bzip2 \
-      g++ \
-      git \
-      graphviz \
-      libgl1-mesa-glx \
-      libhdf5-dev \
-      openmpi-bin \
-      wget \
-      ssh \
-      rsync &amp;&amp; \
-    rm -rf /var/lib/apt/lists/*
-
-# Install conda
-ENV CONDA_DIR /opt/conda
-ENV PATH $CONDA_DIR/bin:$PATH
-
-RUN wget --quiet --no-check-certificate https://repo.continuum.io/miniconda/Miniconda3-4.2.12-Linux-x86_64.sh &amp;&amp; \
-    echo &quot;c59b3dd3cad550ac7596e0d599b91e75d88826db132e4146030ef471bb434e9a *Miniconda3-4.2.12-Linux-x86_64.sh&quot; | sha256sum -c - &amp;&amp; \
-    /bin/bash /Miniconda3-4.2.12-Linux-x86_64.sh -f -b -p $CONDA_DIR &amp;&amp; \
-    rm Miniconda3-4.2.12-Linux-x86_64.sh &amp;&amp; \
-    echo export PATH=$CONDA_DIR/bin:&#39;$PATH&#39; &gt; /etc/profile.d/conda.sh 
-        
-#https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-linux
-# https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-linux#download-and-install-azcopy
-# https://www.microsoft.com/net/download/linux-package-manager/ubuntu16-04/runtime-2.1.2
-RUN wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb &amp;&amp; \
-    dpkg -i packages-microsoft-prod.deb &amp;&amp; \ 
-    apt-get install  -y --no-install-recommends apt-transport-https &amp;&amp; \
-    apt-get update &amp;&amp; \
-    apt-get install  -y --no-install-recommends aspnetcore-runtime-2.1  &amp;&amp; \
-    mkdir /tmp/azcopy &amp;&amp; \
-    wget -O /tmp/azcopy/azcopy.tar.gz https://aka.ms/downloadazcopyprlinux &amp;&amp;  \
-    tar -xf /tmp/azcopy/azcopy.tar.gz -C /tmp/azcopy &amp;&amp;  \
-    /tmp/azcopy/install.sh &amp;&amp; \
-    rm -rf /tmp/azcopy
-
-# Install Python packages and keras
-ENV NB_USER keras
-ENV NB_UID 1000
-
-RUN useradd -m -s /bin/bash -N -u $NB_UID $NB_USER &amp;&amp; \
-    chown $NB_USER $CONDA_DIR -R &amp;&amp; \
-    mkdir -p /src &amp;&amp; \
-    chown $NB_USER /src
-
-USER $NB_USER
-
-ARG python_version=3.6
-
-# tensorflow-gpu 1.10.1 has requirement numpy&lt;=1.14.5,&gt;=1.13.3, but you&#39;ll have numpy 1.15.2 which is incompatible.
-RUN conda install -y python=${python_version} &amp;&amp; \
-    pip install --upgrade pip &amp;&amp; \
-    pip install \
-      sklearn_pandas \
-      scikit-image \
-      tensorflow-gpu \
-      tensorflow-tensorboard \
-      matplotlib \
-      numpy==1.14.5 &amp;&amp; \
-    conda install \
-      bcolz \
-      h5py \
-      matplotlib \
-      mkl \
-      nose \
-      notebook \
-      opencv \
-      Pillow \
-      pandas \
-      pydot \
-      pygpu \
-      pyyaml \
-      requests \
-      scikit-learn \
-      six \
-      tqdm &amp;&amp; \
-    conda install -c conda-forge imageio &amp;&amp; \
-    git clone git://github.com/keras-team/keras.git /src &amp;&amp; pip install -e /src[tests] &amp;&amp; \
-    pip install git+git://github.com/keras-team/keras.git &amp;&amp; \
-    pip install git+https://github.com/aleju/imgaug &amp;&amp; \
-    pip install git+https://www.github.com/keras-team/keras-contrib.git &amp;&amp; \
-    pip install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp36-cp36m-linux_x86_64.whl \
-      torchvision &amp;&amp; \
-    conda clean -yt     
-
-#ADD theanorc /home/keras/.theanorc
-
-ENV PYTHONPATH=&#39;/src/:$PYTHONPATH&#39;
-
-WORKDIR /src
-
-EXPOSE 8888
-
-# CMD jupyter notebook --port=8888 --ip=0.0.0.0
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Overwriting ./../docker/dockerfile
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">dotenv</span>
-<span class="n">docker_image_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;docker_login&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;image_tag&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;:1.0.0&#39;</span>
-<span class="n">docker_file_location</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;docker&#39;</span><span class="p">,</span> <span class="s1">&#39;dockerfile&#39;</span><span class="p">]))</span>
-<span class="n">working_path</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>
-
-<span class="n">docker_image_name</span>
-<span class="n">docker_file_location</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[28]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;georgedockeraccount/chestxray-no-aml-gpu:1.0.0&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[28]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;./../docker/dockerfile&#39;</pre>
+<pre>&#39;/local_dir/code/02_Model/..&#39;</pre>
 </div>
 
 </div>
@@ -12099,11 +11864,165 @@ EXPOSE 8888
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">echo</span> docker build -t <span class="nv">$docker_image_name</span> -f <span class="nv">$docker_file_location</span> <span class="nv">$working_path</span>
-<span class="o">!</span>docker build -t <span class="nv">$docker_image_name</span> -f <span class="nv">$docker_file_location</span> <span class="nv">$working_path</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use the Azure Machine Learning data collector to log various metrics</span>
+<span class="c1"># from azureml.logging import get_azureml_logger</span>
+<span class="c1"># logger = get_azureml_logger()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use Azure Machine Learning history magic to control history collection</span>
+<span class="c1"># History is off by default, options are &quot;on&quot;, &quot;off&quot;, or &quot;show&quot;</span>
+<span class="c1"># %azureml history on</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import utlity functions</span>
+
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+<span class="n">paths_to_append</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;src&#39;</span><span class="p">])))]</span>
+<span class="k">def</span> <span class="nf">add_path_to_sys_path</span><span class="p">(</span><span class="n">path_to_append</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="n">path_to_append</span> <span class="ow">in</span> <span class="n">paths</span> <span class="k">for</span> <span class="n">paths</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)):</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_to_append</span><span class="p">)</span>
+<span class="p">[</span><span class="n">add_path_to_sys_path</span><span class="p">(</span><span class="n">crt_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">crt_path</span> <span class="ow">in</span> <span class="n">paths_to_append</span><span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">azure_chestxray_utils</span>
+<span class="c1"># import azure_chestxray_keras_utils</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[None]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create the file path variables </span>
+<span class="c1"># paths are tipically container level dirs mapped to a host dir for data persistence.</span>
+
+<span class="n">prj_consts</span> <span class="o">=</span> <span class="n">azure_chestxray_utils</span><span class="o">.</span><span class="n">chestxray_consts</span><span class="p">()</span>
+
+ 
+<span class="n">data_base_input_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;..&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_INPUT_DIR_list</span><span class="p">)))</span>
+<span class="n">data_base_output_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;..&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_OUTPUT_DIR_list</span><span class="p">)))</span> 
+
+<span class="c1"># data used for training</span>
+<span class="n">nih_chest_xray_data_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_base_input_dir</span><span class="p">,</span> 
+                                     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">ChestXray_IMAGES_DIR_list</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">])))</span>
+
+<span class="n">data_partitions_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_base_output_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">DATA_PARTITIONS_DIR_list</span><span class="p">)))</span> 
+
+<span class="n">partition_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_partitions_dir</span><span class="p">,</span> <span class="s1">&#39;partition14_unormalized_cleaned.pickle&#39;</span><span class="p">)</span>
+<span class="n">label_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_partitions_dir</span><span class="p">,</span><span class="s1">&#39;labels14_unormalized_cleaned.pickle&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># global variables</span>
+
+<span class="n">weights_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_base_output_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">MODEL_WEIGHTS_DIR_list</span><span class="p">)))</span> 
+<span class="o">!</span>mkdir -p <span class="o">{</span>weights_dir<span class="o">}</span>
+<span class="n">weights_dir</span>
+<span class="o">!</span>ls -l <span class="o">{</span>weights_dir<span class="o">}</span>
+
+<span class="c1"># weights_path = os.path.join(</span>
+<span class="c1">#     weights_dir, </span>
+<span class="c1">#     prj_consts.PRETRAINED_DENSENET201_IMAGENET_CHESTXRAY_MODEL_FILE_NAME)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/local_dir/code/02_Model/../../chestxray/output/weights_tmpdir&#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>total 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>conda install -y -c conda-forge imageio
 </pre></div>
 
 </div>
@@ -12120,545 +12039,7 @@ EXPOSE 8888
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>docker build -t georgedockeraccount/chestxray-no-aml-gpu:1.0.0 -f ./../docker/dockerfile .
-Sending build context to Docker daemon  10.02MB
-Step 1/16 : FROM nvidia/cuda:9.0-cudnn7-devel
- ---&gt; 288866c2c06c
-Step 2/16 : MAINTAINER George Iordanescu &lt;ghiordan@microsoft.com&gt;
- ---&gt; Using cache
- ---&gt; bc9e7c9ac9dd
-Step 3/16 : RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends       apt-utils       bzip2       g++       git       graphviz       libgl1-mesa-glx       libhdf5-dev       openmpi-bin       wget       ssh       rsync &amp;&amp;     rm -rf /var/lib/apt/lists/*
- ---&gt; Using cache
- ---&gt; 3c415595ae4e
-Step 4/16 : ENV CONDA_DIR /opt/conda
- ---&gt; Using cache
- ---&gt; e08bdb87f797
-Step 5/16 : ENV PATH $CONDA_DIR/bin:$PATH
- ---&gt; Using cache
- ---&gt; 3e2afc791489
-Step 6/16 : RUN wget --quiet --no-check-certificate https://repo.continuum.io/miniconda/Miniconda3-4.2.12-Linux-x86_64.sh &amp;&amp;     echo &#34;c59b3dd3cad550ac7596e0d599b91e75d88826db132e4146030ef471bb434e9a *Miniconda3-4.2.12-Linux-x86_64.sh&#34; | sha256sum -c - &amp;&amp;     /bin/bash /Miniconda3-4.2.12-Linux-x86_64.sh -f -b -p $CONDA_DIR &amp;&amp;     rm Miniconda3-4.2.12-Linux-x86_64.sh &amp;&amp;     echo export PATH=$CONDA_DIR/bin:&#39;$PATH&#39; &gt; /etc/profile.d/conda.sh
- ---&gt; Using cache
- ---&gt; 570ecd7f7a5e
-Step 7/16 : RUN wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb &amp;&amp;     dpkg -i packages-microsoft-prod.deb &amp;&amp;     apt-get install  -y --no-install-recommends apt-transport-https &amp;&amp;     apt-get update &amp;&amp;     apt-get install  -y --no-install-recommends aspnetcore-runtime-2.1  &amp;&amp;     mkdir /tmp/azcopy &amp;&amp;     wget -O /tmp/azcopy/azcopy.tar.gz https://aka.ms/downloadazcopyprlinux &amp;&amp;      tar -xf /tmp/azcopy/azcopy.tar.gz -C /tmp/azcopy &amp;&amp;      /tmp/azcopy/install.sh &amp;&amp;     rm -rf /tmp/azcopy
- ---&gt; Using cache
- ---&gt; 9b3926afe812
-Step 8/16 : ENV NB_USER keras
- ---&gt; Using cache
- ---&gt; 4905ce893a13
-Step 9/16 : ENV NB_UID 1000
- ---&gt; Using cache
- ---&gt; e217da7e043c
-Step 10/16 : RUN useradd -m -s /bin/bash -N -u $NB_UID $NB_USER &amp;&amp;     chown $NB_USER $CONDA_DIR -R &amp;&amp;     mkdir -p /src &amp;&amp;     chown $NB_USER /src
- ---&gt; Using cache
- ---&gt; a4e0dd210519
-Step 11/16 : USER $NB_USER
- ---&gt; Using cache
- ---&gt; 9fc15d3af9a5
-Step 12/16 : ARG python_version=3.6
- ---&gt; Using cache
- ---&gt; e918b466cac7
-Step 13/16 : RUN conda install -y python=${python_version} &amp;&amp;     pip install --upgrade pip &amp;&amp;     pip install       sklearn_pandas       scikit-image       tensorflow-gpu       tensorflow-tensorboard       matplotlib       numpy &amp;&amp;     conda install       bcolz       h5py       matplotlib       mkl       nose       notebook       opencv       Pillow       pandas       pydot       pygpu       pyyaml       requests       scikit-learn       six       tqdm &amp;&amp;     conda install -c conda-forge imageio &amp;&amp;     git clone git://github.com/keras-team/keras.git /src &amp;&amp; pip install -e /src[tests] &amp;&amp;     pip install git+git://github.com/keras-team/keras.git &amp;&amp;     pip install git+https://github.com/aleju/imgaug &amp;&amp;     pip install git+https://www.github.com/keras-team/keras-contrib.git &amp;&amp;     pip install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp36-cp36m-linux_x86_64.whl       torchvision &amp;&amp;     conda clean -yt
- ---&gt; Running in a0f105476c3a
-Fetching package metadata .......
-Solving package specifications: ..........
-
-Package plan for installation in environment /opt/conda:
-
-The following packages will be downloaded:
-
-    package                    |            build
-    ---------------------------|-----------------
-    libffi-3.2.1               |                1          38 KB
-    python-3.6.2               |                0        16.5 MB
-    asn1crypto-0.22.0          |           py36_0         148 KB
-    certifi-2016.2.28          |           py36_0         216 KB
-    idna-2.6                   |           py36_0         122 KB
-    pycosat-0.6.2              |           py36_0         197 KB
-    pycparser-2.18             |           py36_0         167 KB
-    pycrypto-2.6.1             |           py36_6         477 KB
-    pyparsing-2.2.0            |           py36_0          96 KB
-    requests-2.14.2            |           py36_0         720 KB
-    ruamel_yaml-0.11.14        |           py36_1         401 KB
-    six-1.10.0                 |           py36_0          19 KB
-    wheel-0.29.0               |           py36_0          88 KB
-    cffi-1.10.0                |           py36_0         341 KB
-    packaging-16.8             |           py36_0          30 KB
-    setuptools-36.4.0          |           py36_1         563 KB
-    cryptography-1.8.1         |           py36_0         846 KB
-    pip-9.0.1                  |           py36_1         1.7 MB
-    pyopenssl-17.0.0           |           py36_0          76 KB
-    conda-4.3.30               |   py36h5d9f9f4_0         511 KB
-    ------------------------------------------------------------
-                                           Total:        23.1 MB
-
-The following NEW packages will be INSTALLED:
-
-    asn1crypto:   0.22.0-py36_0   
-    certifi:      2016.2.28-py36_0
-    cffi:         1.10.0-py36_0   
-    cryptography: 1.8.1-py36_0    
-    idna:         2.6-py36_0      
-    libffi:       3.2.1-1         
-    packaging:    16.8-py36_0     
-    pycparser:    2.18-py36_0     
-    pyopenssl:    17.0.0-py36_0   
-    pyparsing:    2.2.0-py36_0    
-    six:          1.10.0-py36_0   
-
-The following packages will be UPDATED:
-
-    conda:        4.2.12-py35_0    --&gt; 4.3.30-py36h5d9f9f4_0
-    pip:          8.1.2-py35_0     --&gt; 9.0.1-py36_1         
-    pycosat:      0.6.1-py35_1     --&gt; 0.6.2-py36_0         
-    pycrypto:     2.6.1-py35_4     --&gt; 2.6.1-py36_6         
-    python:       3.5.2-0          --&gt; 3.6.2-0              
-    requests:     2.11.1-py35_0    --&gt; 2.14.2-py36_0        
-    ruamel_yaml:  0.11.14-py35_0   --&gt; 0.11.14-py36_1       
-    setuptools:   27.2.0-py35_0    --&gt; 36.4.0-py36_1        
-    wheel:        0.29.0-py35_0    --&gt; 0.29.0-py36_0        
-
-Fetching packages ...
-libffi-3.2.1-1 100% |###############################| Time: 0:00:00   5.59 MB/s
-python-3.6.2-0 100% |###############################| Time: 0:00:00  60.57 MB/s
-asn1crypto-0.2 100% |###############################| Time: 0:00:00   6.48 MB/s
-certifi-2016.2 100% |###############################| Time: 0:00:00   7.87 MB/s
-idna-2.6-py36_ 100% |###############################| Time: 0:00:00   6.14 MB/s
-pycosat-0.6.2- 100% |###############################| Time: 0:00:00   7.51 MB/s
-pycparser-2.18 100% |###############################| Time: 0:00:00   6.90 MB/s
-pycrypto-2.6.1 100% |###############################| Time: 0:00:00  12.57 MB/s
-pyparsing-2.2. 100% |###############################| Time: 0:00:00   5.31 MB/s
-requests-2.14. 100% |###############################| Time: 0:00:00  16.22 MB/s
-ruamel_yaml-0. 100% |###############################| Time: 0:00:00  11.09 MB/s
-six-1.10.0-py3 100% |###############################| Time: 0:00:00   8.20 MB/s
-wheel-0.29.0-p 100% |###############################| Time: 0:00:00   4.91 MB/s
-cffi-1.10.0-py 100% |###############################| Time: 0:00:00  10.47 MB/s
-packaging-16.8 100% |###############################| Time: 0:00:00   6.55 MB/s
-setuptools-36. 100% |###############################| Time: 0:00:00  13.71 MB/s
-cryptography-1 100% |###############################| Time: 0:00:00  14.95 MB/s
-pip-9.0.1-py36 100% |###############################| Time: 0:00:00  28.91 MB/s
-pyopenssl-17.0 100% |###############################| Time: 0:00:00   4.84 MB/s
-conda-4.3.30-p 100% |###############################| Time: 0:00:00  13.04 MB/s
-Extracting packages ...
-[      COMPLETE      ]|##################################################| 100%
-Unlinking packages ...
-[      COMPLETE      ]|##################################################| 100%
-Linking packages ...
-[      COMPLETE      ]|##################################################| 100%
-Collecting pip
-  Downloading https://files.pythonhosted.org/packages/5f/25/e52d3f31441505a5f3af41213346e5b6c221c9e086a166f3703d2ddaf940/pip-18.0-py2.py3-none-any.whl (1.3MB)
-Installing collected packages: pip
-  Found existing installation: pip 9.0.1
-    Uninstalling pip-9.0.1:
-      Successfully uninstalled pip-9.0.1
-Successfully installed pip-18.0
-Collecting sklearn_pandas
-  Downloading https://files.pythonhosted.org/packages/7e/9c/c94f46b40b86d2c77c46c4c1b858fc66c117b4390665eca28f2e0812db45/sklearn_pandas-1.7.0-py2.py3-none-any.whl
-Collecting scikit-image
-  Downloading https://files.pythonhosted.org/packages/34/79/cefff573a53ca3fb4c390739d19541b95f371e24d2990aed4cd8837971f0/scikit_image-0.14.0-cp36-cp36m-manylinux1_x86_64.whl (25.3MB)
-Collecting tensorflow-gpu
-  Downloading https://files.pythonhosted.org/packages/3f/c3/000755084b5e7b5a11df1b9166a54936075ec280b7a615cecce42973fc8b/tensorflow_gpu-1.10.1-cp36-cp36m-manylinux1_x86_64.whl (253.2MB)
-Collecting tensorflow-tensorboard
-  Downloading https://files.pythonhosted.org/packages/cc/fa/91c06952517b4f1bc075545b062a4112e30cebe558a6b962816cb33efa27/tensorflow_tensorboard-1.5.1-py3-none-any.whl (3.0MB)
-Collecting matplotlib
-  Downloading https://files.pythonhosted.org/packages/ed/89/dd823436a5f8d5ca9304b51b554863bfd366ca84708d5812f5ee87c923bc/matplotlib-3.0.0-cp36-cp36m-manylinux1_x86_64.whl (12.8MB)
-Collecting numpy
-  Downloading https://files.pythonhosted.org/packages/22/02/bae88c4aaea4256d890adbf3f7cf33e59a443f9985cf91cd08a35656676a/numpy-1.15.2-cp36-cp36m-manylinux1_x86_64.whl (13.9MB)
-Collecting scipy&gt;=0.14 (from sklearn_pandas)
-  Downloading https://files.pythonhosted.org/packages/a8/0b/f163da98d3a01b3e0ef1cab8dd2123c34aee2bafbb1c5bffa354cc8a1730/scipy-1.1.0-cp36-cp36m-manylinux1_x86_64.whl (31.2MB)
-Collecting pandas&gt;=0.11.0 (from sklearn_pandas)
-  Downloading https://files.pythonhosted.org/packages/e1/d8/feeb346d41f181e83fba45224ab14a8d8af019b48af742e047f3845d8cff/pandas-0.23.4-cp36-cp36m-manylinux1_x86_64.whl (8.9MB)
-Collecting scikit-learn&gt;=0.15.0 (from sklearn_pandas)
-  Downloading https://files.pythonhosted.org/packages/f9/c8/8db4108aba5e2166cd2ea4eafa1a4b82f89240a1fa85733029cc2358ad1f/scikit_learn-0.19.2-cp36-cp36m-manylinux1_x86_64.whl (4.9MB)
-Collecting networkx&gt;=1.8 (from scikit-image)
-  Downloading https://files.pythonhosted.org/packages/f3/f4/7e20ef40b118478191cec0b58c3192f822cace858c19505c7670961b76b2/networkx-2.2.zip (1.7MB)
-Collecting dask[array]&gt;=0.9.0 (from scikit-image)
-  Downloading https://files.pythonhosted.org/packages/63/cc/d8b279ad3512e682069263de0494eeb9907ebe6b98bef01424be36421e13/dask-0.19.2-py2.py3-none-any.whl (657kB)
-Collecting cloudpickle&gt;=0.2.1 (from scikit-image)
-  Downloading https://files.pythonhosted.org/packages/98/d6/a78a4589234cc6f47f29665c1225f30467db5fdaf4ca1fb52b0685bff108/cloudpickle-0.5.6-py2.py3-none-any.whl
-Collecting pillow&gt;=4.3.0 (from scikit-image)
-  Downloading https://files.pythonhosted.org/packages/d1/24/f53ff6b61b3d728b90934bddb4f03f8ab584a7f49299bf3bde56e2952612/Pillow-5.2.0-cp36-cp36m-manylinux1_x86_64.whl (2.0MB)
-Requirement already satisfied: six&gt;=1.10.0 in /opt/conda/lib/python3.6/site-packages (from scikit-image) (1.10.0)
-Collecting PyWavelets&gt;=0.4.0 (from scikit-image)
-  Downloading https://files.pythonhosted.org/packages/90/d0/09b2bf3368d5bba6ee1a8868ce94eebbb105fc8bf89fa43c90348b21a7cb/PyWavelets-1.0.0-cp36-cp36m-manylinux1_x86_64.whl (4.4MB)
-Collecting astor&gt;=0.6.0 (from tensorflow-gpu)
-  Downloading https://files.pythonhosted.org/packages/35/6b/11530768cac581a12952a2aad00e1526b89d242d0b9f59534ef6e6a1752f/astor-0.7.1-py2.py3-none-any.whl
-Collecting gast&gt;=0.2.0 (from tensorflow-gpu)
-  Downloading https://files.pythonhosted.org/packages/5c/78/ff794fcae2ce8aa6323e789d1f8b3b7765f601e7702726f430e814822b96/gast-0.2.0.tar.gz
-Collecting tensorboard&lt;1.11.0,&gt;=1.10.0 (from tensorflow-gpu)
-  Downloading https://files.pythonhosted.org/packages/c6/17/ecd918a004f297955c30b4fffbea100b1606c225dbf0443264012773c3ff/tensorboard-1.10.0-py3-none-any.whl (3.3MB)
-Requirement already satisfied: setuptools&lt;=39.1.0 in /opt/conda/lib/python3.6/site-packages (from tensorflow-gpu) (36.4.0)
-Requirement already satisfied: wheel&gt;=0.26 in /opt/conda/lib/python3.6/site-packages (from tensorflow-gpu) (0.29.0)
-Collecting protobuf&gt;=3.6.0 (from tensorflow-gpu)
-  Downloading https://files.pythonhosted.org/packages/c2/f9/28787754923612ca9bfdffc588daa05580ed70698add063a5629d1a4209d/protobuf-3.6.1-cp36-cp36m-manylinux1_x86_64.whl (1.1MB)
-Collecting absl-py&gt;=0.1.6 (from tensorflow-gpu)
-  Downloading https://files.pythonhosted.org/packages/16/db/cce5331638138c178dd1d5fb69f3f55eb3787a12efd9177177ae203e847f/absl-py-0.5.0.tar.gz (90kB)
-Collecting termcolor&gt;=1.1.0 (from tensorflow-gpu)
-  Downloading https://files.pythonhosted.org/packages/8a/48/a76be51647d0eb9f10e2a4511bf3ffb8cc1e6b14e9e4fab46173aa79f981/termcolor-1.1.0.tar.gz
-Collecting grpcio&gt;=1.8.6 (from tensorflow-gpu)
-  Downloading https://files.pythonhosted.org/packages/a7/9c/523fec4e50cd4de5effeade9fab6c1da32e7e1d72372e8e514274ffb6509/grpcio-1.15.0-cp36-cp36m-manylinux1_x86_64.whl (9.5MB)
-Collecting html5lib==0.9999999 (from tensorflow-tensorboard)
-  Downloading https://files.pythonhosted.org/packages/ae/ae/bcb60402c60932b32dfaf19bb53870b29eda2cd17551ba5639219fb5ebf9/html5lib-0.9999999.tar.gz (889kB)
-Collecting werkzeug&gt;=0.11.10 (from tensorflow-tensorboard)
-  Downloading https://files.pythonhosted.org/packages/20/c4/12e3e56473e52375aa29c4764e70d1b8f3efa6682bef8d0aae04fe335243/Werkzeug-0.14.1-py2.py3-none-any.whl (322kB)
-Collecting markdown&gt;=2.6.8 (from tensorflow-tensorboard)
-  Downloading https://files.pythonhosted.org/packages/7a/fd/e22357c299e93c0bc11ec8ba54e79f98dd568e09adfe9b39d6852c744938/Markdown-3.0-py2.py3-none-any.whl (89kB)
-Collecting bleach==1.5.0 (from tensorflow-tensorboard)
-  Downloading https://files.pythonhosted.org/packages/33/70/86c5fec937ea4964184d4d6c4f0b9551564f821e1c3575907639036d9b90/bleach-1.5.0-py2.py3-none-any.whl
-Collecting cycler&gt;=0.10 (from matplotlib)
-  Downloading https://files.pythonhosted.org/packages/f7/d2/e07d3ebb2bd7af696440ce7e754c59dd546ffe1bbe732c8ab68b9c834e61/cycler-0.10.0-py2.py3-none-any.whl
-Collecting kiwisolver&gt;=1.0.1 (from matplotlib)
-  Downloading https://files.pythonhosted.org/packages/69/a7/88719d132b18300b4369fbffa741841cfd36d1e637e1990f27929945b538/kiwisolver-1.0.1-cp36-cp36m-manylinux1_x86_64.whl (949kB)
-Collecting python-dateutil&gt;=2.1 (from matplotlib)
-  Downloading https://files.pythonhosted.org/packages/cf/f5/af2b09c957ace60dcfac112b669c45c8c97e32f94aa8b56da4c6d1682825/python_dateutil-2.7.3-py2.py3-none-any.whl (211kB)
-Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.1 in /opt/conda/lib/python3.6/site-packages (from matplotlib) (2.2.0)
-Collecting pytz&gt;=2011k (from pandas&gt;=0.11.0-&gt;sklearn_pandas)
-  Downloading https://files.pythonhosted.org/packages/30/4e/27c34b62430286c6d59177a0842ed90dc789ce5d1ed740887653b898779a/pytz-2018.5-py2.py3-none-any.whl (510kB)
-Collecting decorator&gt;=4.3.0 (from networkx&gt;=1.8-&gt;scikit-image)
-  Downloading https://files.pythonhosted.org/packages/bc/bb/a24838832ba35baf52f32ab1a49b906b5f82fb7c76b2f6a7e35e140bac30/decorator-4.3.0-py2.py3-none-any.whl
-Collecting toolz&gt;=0.7.3; extra == &#34;array&#34; (from dask[array]&gt;=0.9.0-&gt;scikit-image)
-  Downloading https://files.pythonhosted.org/packages/14/d0/a73c15bbeda3d2e7b381a36afb0d9cd770a9f4adc5d1532691013ba881db/toolz-0.9.0.tar.gz (45kB)
-Building wheels for collected packages: networkx, gast, absl-py, termcolor, html5lib, toolz
-  Running setup.py bdist_wheel for networkx: started
-  Running setup.py bdist_wheel for networkx: finished with status &#39;done&#39;
-  Stored in directory: /home/keras/.cache/pip/wheels/68/f8/29/b53346a112a07d30a5a84d53f19aeadaa1a474897c0423af91
-  Running setup.py bdist_wheel for gast: started
-  Running setup.py bdist_wheel for gast: finished with status &#39;done&#39;
-  Stored in directory: /home/keras/.cache/pip/wheels/9a/1f/0e/3cde98113222b853e98fc0a8e9924480a3e25f1b4008cedb4f
-  Running setup.py bdist_wheel for absl-py: started
-  Running setup.py bdist_wheel for absl-py: finished with status &#39;done&#39;
-  Stored in directory: /home/keras/.cache/pip/wheels/3c/33/ae/db8cd618e62f87594c13a5483f96e618044f9b01596efd013f
-  Running setup.py bdist_wheel for termcolor: started
-  Running setup.py bdist_wheel for termcolor: finished with status &#39;done&#39;
-  Stored in directory: /home/keras/.cache/pip/wheels/7c/06/54/bc84598ba1daf8f970247f550b175aaaee85f68b4b0c5ab2c6
-  Running setup.py bdist_wheel for html5lib: started
-  Running setup.py bdist_wheel for html5lib: finished with status &#39;done&#39;
-  Stored in directory: /home/keras/.cache/pip/wheels/50/ae/f9/d2b189788efcf61d1ee0e36045476735c838898eef1cad6e29
-  Running setup.py bdist_wheel for toolz: started
-  Running setup.py bdist_wheel for toolz: finished with status &#39;done&#39;
-  Stored in directory: /home/keras/.cache/pip/wheels/f4/0c/f6/ce6b2d1aa459ee97cc3c0f82236302bd62d89c86c700219463
-Successfully built networkx gast absl-py termcolor html5lib toolz
-<span class="ansi-red-intense-fg">tensorflow-gpu 1.10.1 has requirement numpy&lt;=1.14.5,&gt;=1.13.3, but you&#39;ll have numpy 1.15.2 which is incompatible.
-</span>Installing collected packages: numpy, scipy, pytz, python-dateutil, pandas, scikit-learn, sklearn-pandas, decorator, networkx, cycler, kiwisolver, matplotlib, toolz, dask, cloudpickle, pillow, PyWavelets, scikit-image, astor, gast, protobuf, werkzeug, markdown, tensorboard, absl-py, termcolor, grpcio, tensorflow-gpu, html5lib, bleach, tensorflow-tensorboard
-Successfully installed PyWavelets-1.0.0 absl-py-0.5.0 astor-0.7.1 bleach-1.5.0 cloudpickle-0.5.6 cycler-0.10.0 dask-0.19.2 decorator-4.3.0 gast-0.2.0 grpcio-1.15.0 html5lib-0.9999999 kiwisolver-1.0.1 markdown-3.0 matplotlib-3.0.0 networkx-2.2 numpy-1.15.2 pandas-0.23.4 pillow-5.2.0 protobuf-3.6.1 python-dateutil-2.7.3 pytz-2018.5 scikit-image-0.14.0 scikit-learn-0.19.2 scipy-1.1.0 sklearn-pandas-1.7.0 tensorboard-1.10.0 tensorflow-gpu-1.10.1 tensorflow-tensorboard-1.5.1 termcolor-1.1.0 toolz-0.9.0 werkzeug-0.14.1
-Fetching package metadata ...........
-Solving package specifications: .
-
-Package plan for installation in environment /opt/conda:
-
-The following NEW packages will be INSTALLED:
-
-    appdirs:           1.4.3-py36h28b3542_0  
-    attrs:             18.2.0-py36h28b3542_0 
-    automat:           0.7.0-py36_0          
-    backcall:          0.1.0-py36_0          
-    bcolz:             1.2.1-py36h04863e7_0  
-    blas:              1.0-mkl               
-    bleach:            2.1.4-py36_0          
-    blosc:             1.14.4-hdbcaa40_0     
-    bokeh:             0.13.0-py36_0         
-    bzip2:             1.0.6-h14c3975_5      
-    cairo:             1.14.12-h8948797_3    
-    chardet:           3.0.4-py36_1          
-    click:             6.7-py36_0            
-    cloudpickle:       0.5.5-py36_0          
-    constantly:        15.1.0-py36h28b3542_0 
-    cycler:            0.10.0-py36_0         
-    cytoolz:           0.9.0.1-py36h14c3975_1
-    dask:              0.19.1-py36_0         
-    dask-core:         0.19.1-py36_0         
-    dbus:              1.13.2-h714fa37_1     
-    decorator:         4.3.0-py36_0          
-    distributed:       1.23.1-py36_0         
-    entrypoints:       0.2.3-py36_2          
-    expat:             2.2.6-he6710b0_0      
-    ffmpeg:            4.0-hcdf2ecd_0        
-    fontconfig:        2.13.0-h9420a91_0     
-    freeglut:          3.0.0-hf484d3e_5      
-    freetype:          2.9.1-h8a8886c_1      
-    glib:              2.56.2-hd408876_0     
-    gmp:               6.1.2-h6c8ec71_1      
-    graphite2:         1.3.12-h23475e2_2     
-    gst-plugins-base:  1.14.0-hbbd80ab_1     
-    gstreamer:         1.14.0-hb453b48_1     
-    h5py:              2.8.0-py36h989c5e5_3  
-    harfbuzz:          1.8.8-hffaf4a1_0      
-    hdf5:              1.10.2-hba1933b_1     
-    heapdict:          1.0.0-py36_2          
-    html5lib:          1.0.1-py36_0          
-    hyperlink:         18.0.0-py36_0         
-    icu:               58.2-h9c2bf20_1       
-    incremental:       17.5.0-py36_0         
-    intel-openmp:      2019.0-118            
-    ipykernel:         4.9.0-py36_1          
-    ipython:           6.5.0-py36_0          
-    ipython_genutils:  0.2.0-py36_0          
-    jasper:            2.0.14-h07fcdf6_1     
-    jedi:              0.12.1-py36_0         
-    jinja2:            2.10-py36_0           
-    jpeg:              9b-h024ee3a_2         
-    jsonschema:        2.6.0-py36_0          
-    jupyter_client:    5.2.3-py36_0          
-    jupyter_core:      4.4.0-py36_0          
-    kiwisolver:        1.0.1-py36hf484d3e_0  
-    libedit:           3.1-heed3624_0        
-    libgcc-ng:         8.2.0-hdf63c60_1      
-    libgfortran-ng:    7.3.0-hdf63c60_0      
-    libglu:            9.0.0-hf484d3e_1      
-    libgpuarray:       0.7.6-h14c3975_0      
-    libopencv:         3.4.2-hb342d67_1      
-    libopus:           1.2.1-hb9ed12e_0      
-    libpng:            1.6.34-hb9fc6fc_0     
-    libsodium:         1.0.16-h1bed415_0     
-    libstdcxx-ng:      8.2.0-hdf63c60_1      
-    libtiff:           4.0.9-he85c1e1_2      
-    libuuid:           1.0.3-h1bed415_2      
-    libvpx:            1.7.0-h439df22_0      
-    libxcb:            1.13-h1bed415_1       
-    libxml2:           2.9.8-h26e45fe_1      
-    locket:            0.2.0-py36_1          
-    lzo:               2.10-h49e0be7_2       
-    mako:              1.0.7-py36_0          
-    markupsafe:        1.0-py36h14c3975_1    
-    matplotlib:        2.2.3-py36hb69df0a_0  
-    mistune:           0.8.3-py36h14c3975_1  
-    mkl:               2019.0-118            
-    mkl_fft:           1.0.4-py36h4414c95_1  
-    mkl_random:        1.0.1-py36h4414c95_1  
-    msgpack-python:    0.5.6-py36h6bb024c_1  
-    nbconvert:         5.3.1-py36_0          
-    nbformat:          4.4.0-py36_0          
-    ncurses:           6.0-h9df7e31_2        
-    nose:              1.3.7-py36_2          
-    notebook:          5.6.0-py36_0          
-    numexpr:           2.6.8-py36hd89afb7_0  
-    numpy:             1.15.1-py36h1d66e8a_0 
-    numpy-base:        1.15.1-py36h81de0dd_0 
-    olefile:           0.46-py36_0           
-    opencv:            3.4.2-py36h6fd60c2_1  
-    pandas:            0.23.4-py36h04863e7_0 
-    pandoc:            2.2.3.2-0             
-    pandocfilters:     1.4.2-py36_1          
-    parso:             0.3.1-py36_0          
-    partd:             0.3.8-py36_0          
-    pcre:              8.42-h439df22_0       
-    pexpect:           4.6.0-py36_0          
-    pickleshare:       0.7.4-py36_0          
-    pillow:            5.2.0-py36heded4f4_0  
-    pixman:            0.34.0-hceecf20_3     
-    prometheus_client: 0.3.1-py36h28b3542_0  
-    prompt_toolkit:    1.0.15-py36_0         
-    psutil:            5.4.7-py36h14c3975_0  
-    ptyprocess:        0.6.0-py36_0          
-    py-opencv:         3.4.2-py36hb342d67_1  
-    pyasn1:            0.4.4-py36h28b3542_0  
-    pyasn1-modules:    0.2.2-py36_0          
-    pydot:             1.2.4-py36_0          
-    pygments:          2.2.0-py36_0          
-    pygpu:             0.7.6-py36h035aef0_0  
-    pyqt:              5.9.2-py36h05f1152_2  
-    pysocks:           1.6.8-py36_0          
-    pytables:          3.4.4-py36ha205bf6_0  
-    python-dateutil:   2.7.3-py36_0          
-    pytz:              2018.5-py36_0         
-    pyyaml:            3.13-py36h14c3975_0   
-    pyzmq:             17.1.2-py36h14c3975_0 
-    qt:                5.9.6-h52aff34_0      
-    scikit-learn:      0.19.2-py36h4989274_0 
-    scipy:             1.1.0-py36hfa4b5c9_1  
-    send2trash:        1.5.0-py36_0          
-    service_identity:  17.0.0-py36h28b3542_0 
-    simplegeneric:     0.8.1-py36_2          
-    sip:               4.19.8-py36hf484d3e_0 
-    snappy:            1.1.7-hbae5bb6_3      
-    sortedcontainers:  2.0.5-py36_0          
-    tblib:             1.3.2-py36_0          
-    terminado:         0.8.1-py36_1          
-    testpath:          0.3.1-py36_0          
-    toolz:             0.9.0-py36_0          
-    tornado:           5.1-py36h14c3975_0    
-    tqdm:              4.26.0-py36h28b3542_0 
-    traitlets:         4.3.2-py36_0          
-    twisted:           18.7.0-py36h14c3975_1 
-    urllib3:           1.23-py36_0           
-    wcwidth:           0.1.7-py36_0          
-    webencodings:      0.5.1-py36_1          
-    zeromq:            4.2.5-hf484d3e_1      
-    zict:              0.1.3-py36_0          
-    zope:              1.0-py36_1            
-    zope.interface:    4.5.0-py36h14c3975_0  
-
-The following packages will be UPDATED:
-
-    certifi:           2016.2.28-py36_0       --&gt; 2018.8.24-py36_1      
-    conda:             4.3.30-py36h5d9f9f4_0  --&gt; 4.5.11-py36_0         
-    conda-env:         2.6.0-0                --&gt; 2.6.0-1               
-    pycosat:           0.6.2-py36_0           --&gt; 0.6.3-py36h14c3975_0  
-    python:            3.6.2-0                --&gt; 3.6.3-hc9025b9_1      
-    readline:          6.2-2                  --&gt; 7.0-ha6073c6_4        
-    requests:          2.14.2-py36_0          --&gt; 2.19.1-py36_0         
-    ruamel_yaml:       0.11.14-py36_1         --&gt; 0.15.46-py36h14c3975_0
-    six:               1.10.0-py36_0          --&gt; 1.11.0-py36_1         
-    sqlite:            3.13.0-0               --&gt; 3.23.1-he433501_0     
-    tk:                8.5.18-0               --&gt; 8.6.8-hbc83047_0      
-    xz:                5.2.2-0                --&gt; 5.2.4-h14c3975_4      
-    yaml:              0.1.6-0                --&gt; 0.1.7-had09818_2      
-    zlib:              1.2.8-3                --&gt; 1.2.11-ha838bed_2     
-
-Proceed ([y]/n)? 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-bcolz-1.2.1-py 100% |###############################| Time: 0:00:00  63.08 MB/s
-Solving environment: ...working... done
+<pre>Solving environment: done
 
 ## Package Plan ##
 
@@ -12672,11 +12053,11 @@ The following packages will be downloaded:
 
     package                    |            build
     ---------------------------|-----------------
-    certifi-2018.8.24          |        py36_1001         139 KB  conda-forge
-    openssl-1.0.2p             |       h470a237_0         3.5 MB  conda-forge
+    imageio-2.3.0              |             py_1         3.1 MB  conda-forge
     ca-certificates-2018.8.24  |       ha4d7672_0         136 KB  conda-forge
     conda-4.5.11               |           py36_0         625 KB  conda-forge
-    imageio-2.3.0              |             py_1         3.1 MB  conda-forge
+    certifi-2018.8.24          |        py36_1001         139 KB  conda-forge
+    openssl-1.0.2p             |       h470a237_0         3.5 MB  conda-forge
     ------------------------------------------------------------
                                            Total:         7.5 MB
 
@@ -12691,509 +12072,16 @@ The following packages will be UPDATED:
     conda:           4.5.11-py36_0                    --&gt; 4.5.11-py36_0       conda-forge
     openssl:         1.0.2j-0                         --&gt; 1.0.2p-h470a237_0   conda-forge
 
-Proceed ([y]/n)? 
-certifi-2018.8.24    | 139 KB    | ########## | 100% <span class="ansi-red-intense-fg">
-openssl-1.0.2p       | 3.5 MB    | ########## | 100% </span><span class="ansi-red-intense-fg">
-ca-certificates-2018 | 136 KB    | ########## | 100% </span><span class="ansi-red-intense-fg">
-conda-4.5.11         | 625 KB    | ########## | 100% </span><span class="ansi-red-intense-fg">
-imageio-2.3.0        | 3.1 MB    | ########## | 100% </span><span class="ansi-red-intense-fg">
+
 Downloading and Extracting Packages
-Preparing transaction: ...working... done
-Verifying transaction: ...working... done
-Executing transaction: ...working... done
-</span><span class="ansi-red-intense-fg">
-</span><span class="ansi-red-intense-fg">Cloning into &#39;/src&#39;...
-</span>Obtaining file:///src
-Requirement already satisfied: numpy&gt;=1.9.1 in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (1.15.2)
-Requirement already satisfied: scipy&gt;=0.14 in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (1.1.0)
-Requirement already satisfied: six&gt;=1.9.0 in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (1.11.0)
-Requirement already satisfied: pyyaml in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (3.13)
-Requirement already satisfied: h5py in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (2.8.0)
-Collecting keras_applications==1.0.4 (from Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/54/90/8f327deaa37a71caddb59b7b4aaa9d4b3e90c0e76f8c2d1572005278ddc5/Keras_Applications-1.0.4-py2.py3-none-any.whl (43kB)
-Collecting keras_preprocessing==1.0.2 (from Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/71/26/1e778ebd737032749824d5cba7dbd3b0cf9234b87ab5ec79f5f0403ca7e9/Keras_Preprocessing-1.0.2-py2.py3-none-any.whl
-Collecting pytest (from Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/0c/9a/592314ceda78f3307afb6cf56d7fdbb92c5a5960a88a6d2fd25c11312ead/pytest-3.8.1-py2.py3-none-any.whl (209kB)
-Collecting pytest-pep8 (from Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/1f/1c/c834344ef39381558b047bea1e3005197fa8457c199d58219996ca07defb/pytest-pep8-1.0.6.tar.gz
-Collecting pytest-xdist (from Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/06/9f/d742d21f278a40c146362e69bc3d92d80b713368a4d0c48565b5c7820611/pytest_xdist-1.23.0-py2.py3-none-any.whl
-Collecting pytest-cov (from Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/30/0a/1b009b525526cd3cd9f52f52391b426c5a3597447be811a10bcb1f6b05eb/pytest_cov-2.6.0-py2.py3-none-any.whl
-Collecting pytest-timeout (from Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/ae/77/3b714fcfda89925be29f5cdea5b6199912265f54dc23b9af7d8c588e1830/pytest_timeout-1.3.2-py2.py3-none-any.whl
-Requirement already satisfied: pandas in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (0.23.4)
-Requirement already satisfied: requests in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (2.19.1)
-Requirement already satisfied: attrs&gt;=17.4.0 in /opt/conda/lib/python3.6/site-packages (from pytest-&gt;Keras==2.2.2) (18.2.0)
-Collecting py&gt;=1.5.0 (from pytest-&gt;Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/c8/47/d179b80ab1dc1bfd46a0c87e391be47e6c7ef5831a9c138c5c49d1756288/py-1.6.0-py2.py3-none-any.whl (83kB)
-Collecting atomicwrites&gt;=1.0 (from pytest-&gt;Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/3a/9a/9d878f8d885706e2530402de6417141129a943802c084238914fa6798d97/atomicwrites-1.2.1-py2.py3-none-any.whl
-Requirement already satisfied: setuptools in /opt/conda/lib/python3.6/site-packages (from pytest-&gt;Keras==2.2.2) (36.4.0)
-Collecting more-itertools&gt;=4.0.0 (from pytest-&gt;Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/79/b1/eace304ef66bd7d3d8b2f78cc374b73ca03bc53664d78151e9df3b3996cc/more_itertools-4.3.0-py3-none-any.whl (48kB)
-Collecting pluggy&gt;=0.7 (from pytest-&gt;Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/f5/f1/5a93c118663896d83f7bcbfb7f657ce1d0c0d617e6b4a443a53abcc658ca/pluggy-0.7.1-py2.py3-none-any.whl
-Collecting pytest-cache (from pytest-pep8-&gt;Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/d1/15/082fd0428aab33d2bafa014f3beb241830427ba803a8912a5aaeaf3a5663/pytest-cache-1.0.tar.gz
-Collecting pep8&gt;=1.3 (from pytest-pep8-&gt;Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/42/3f/669429ce58de2c22d8d2c542752e137ec4b9885fff398d3eceb1a7f5acb4/pep8-1.7.1-py2.py3-none-any.whl (41kB)
-Collecting execnet&gt;=1.1 (from pytest-xdist-&gt;Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/f9/76/3343e69a2a1602052f587898934e5fea395d22310d39c07955596597227c/execnet-1.5.0-py2.py3-none-any.whl
-Collecting pytest-forked (from pytest-xdist-&gt;Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/dd/9d/fb75af584b850a902c9ce5ec96ea5c623978113b8a240ab414e1a435df93/pytest_forked-0.2-py2.py3-none-any.whl
-Collecting coverage&gt;=4.4 (from pytest-cov-&gt;Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/3d/a0/b12090c40e0b8196b973962ec71c1c541a6c04af58ba5ad85683b3de251a/coverage-4.5.1-cp36-cp36m-manylinux1_x86_64.whl (202kB)
-Requirement already satisfied: python-dateutil&gt;=2.5.0 in /opt/conda/lib/python3.6/site-packages (from pandas-&gt;Keras==2.2.2) (2.7.3)
-Requirement already satisfied: pytz&gt;=2011k in /opt/conda/lib/python3.6/site-packages (from pandas-&gt;Keras==2.2.2) (2018.5)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /opt/conda/lib/python3.6/site-packages (from requests-&gt;Keras==2.2.2) (2018.8.24)
-Requirement already satisfied: urllib3&lt;1.24,&gt;=1.21.1 in /opt/conda/lib/python3.6/site-packages (from requests-&gt;Keras==2.2.2) (1.23)
-Requirement already satisfied: chardet&lt;3.1.0,&gt;=3.0.2 in /opt/conda/lib/python3.6/site-packages (from requests-&gt;Keras==2.2.2) (3.0.4)
-Requirement already satisfied: idna&lt;2.8,&gt;=2.5 in /opt/conda/lib/python3.6/site-packages (from requests-&gt;Keras==2.2.2) (2.6)
-Collecting apipkg&gt;=1.4 (from execnet&gt;=1.1-&gt;pytest-xdist-&gt;Keras==2.2.2)
-  Downloading https://files.pythonhosted.org/packages/67/08/4815a09603fc800209431bec5b8bd2acf2f95abdfb558a44a42507fb94da/apipkg-1.5-py2.py3-none-any.whl
-Building wheels for collected packages: pytest-pep8, pytest-cache
-  Running setup.py bdist_wheel for pytest-pep8: started
-  Running setup.py bdist_wheel for pytest-pep8: finished with status &#39;done&#39;
-  Stored in directory: /home/keras/.cache/pip/wheels/68/34/52/2a6e08e030cef8b3671898f34cecb12750cc4b96ebfe66fe67
-  Running setup.py bdist_wheel for pytest-cache: started
-  Running setup.py bdist_wheel for pytest-cache: finished with status &#39;done&#39;
-  Stored in directory: /home/keras/.cache/pip/wheels/e4/9e/28/59d0a23800e49808f17920c5922252c661966ca4a36db5ee38
-Successfully built pytest-pep8 pytest-cache
-Installing collected packages: keras-applications, keras-preprocessing, py, atomicwrites, more-itertools, pluggy, pytest, apipkg, execnet, pytest-cache, pep8, pytest-pep8, pytest-forked, pytest-xdist, coverage, pytest-cov, pytest-timeout, Keras
-  Running setup.py develop for Keras
-Successfully installed Keras apipkg-1.5 atomicwrites-1.2.1 coverage-4.5.1 execnet-1.5.0 keras-applications-1.0.4 keras-preprocessing-1.0.2 more-itertools-4.3.0 pep8-1.7.1 pluggy-0.7.1 py-1.6.0 pytest-3.8.1 pytest-cache-1.0 pytest-cov-2.6.0 pytest-forked-0.2 pytest-pep8-1.0.6 pytest-timeout-1.3.2 pytest-xdist-1.23.0
-Collecting git+git://github.com/keras-team/keras.git
-  Cloning git://github.com/keras-team/keras.git to /tmp/pip-req-build-dsccj43g
-Requirement already satisfied (use --upgrade to upgrade): Keras==2.2.2 from git+git://github.com/keras-team/keras.git in /src
-Requirement already satisfied: numpy&gt;=1.9.1 in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (1.15.2)
-Requirement already satisfied: scipy&gt;=0.14 in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (1.1.0)
-Requirement already satisfied: six&gt;=1.9.0 in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (1.11.0)
-Requirement already satisfied: pyyaml in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (3.13)
-Requirement already satisfied: h5py in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (2.8.0)
-Requirement already satisfied: keras_applications==1.0.4 in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (1.0.4)
-Requirement already satisfied: keras_preprocessing==1.0.2 in /opt/conda/lib/python3.6/site-packages (from Keras==2.2.2) (1.0.2)
-Building wheels for collected packages: Keras
-  Running setup.py bdist_wheel for Keras: started
-  Running setup.py bdist_wheel for Keras: finished with status &#39;done&#39;
-  Stored in directory: /tmp/pip-ephem-wheel-cache-b5obx56s/wheels/e6/02/ad/5e8e1a5824af71082e2260fe7e2eaa1b745c34706e6ff0a14b
-Successfully built Keras
-Collecting git+https://github.com/aleju/imgaug
-  Cloning https://github.com/aleju/imgaug to /tmp/pip-req-build-sd3r3wwh
-Requirement already satisfied: scipy in /opt/conda/lib/python3.6/site-packages (from imgaug==0.2.6) (1.1.0)
-Requirement already satisfied: scikit-image&gt;=0.11.0 in /opt/conda/lib/python3.6/site-packages (from imgaug==0.2.6) (0.14.0)
-Requirement already satisfied: numpy&gt;=1.7.0 in /opt/conda/lib/python3.6/site-packages (from imgaug==0.2.6) (1.15.2)
-Requirement already satisfied: six in /opt/conda/lib/python3.6/site-packages (from imgaug==0.2.6) (1.11.0)
-Requirement already satisfied: pillow&gt;=4.3.0 in /opt/conda/lib/python3.6/site-packages (from scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (5.2.0)
-Requirement already satisfied: networkx&gt;=1.8 in /opt/conda/lib/python3.6/site-packages (from scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (2.2)
-Requirement already satisfied: dask[array]&gt;=0.9.0 in /opt/conda/lib/python3.6/site-packages (from scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (0.19.2)
-Requirement already satisfied: PyWavelets&gt;=0.4.0 in /opt/conda/lib/python3.6/site-packages (from scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (1.0.0)
-Requirement already satisfied: cloudpickle&gt;=0.2.1 in /opt/conda/lib/python3.6/site-packages (from scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (0.5.6)
-Requirement already satisfied: matplotlib&gt;=2.0.0 in /opt/conda/lib/python3.6/site-packages (from scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (3.0.0)
-Requirement already satisfied: decorator&gt;=4.3.0 in /opt/conda/lib/python3.6/site-packages (from networkx&gt;=1.8-&gt;scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (4.3.0)
-Requirement already satisfied: toolz&gt;=0.7.3; extra == &#34;array&#34; in /opt/conda/lib/python3.6/site-packages (from dask[array]&gt;=0.9.0-&gt;scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (0.9.0)
-Requirement already satisfied: cycler&gt;=0.10 in /opt/conda/lib/python3.6/site-packages (from matplotlib&gt;=2.0.0-&gt;scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (0.10.0)
-Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.1 in /opt/conda/lib/python3.6/site-packages (from matplotlib&gt;=2.0.0-&gt;scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (2.2.0)
-Requirement already satisfied: python-dateutil&gt;=2.1 in /opt/conda/lib/python3.6/site-packages (from matplotlib&gt;=2.0.0-&gt;scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (2.7.3)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /opt/conda/lib/python3.6/site-packages (from matplotlib&gt;=2.0.0-&gt;scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (1.0.1)
-Requirement already satisfied: setuptools in /opt/conda/lib/python3.6/site-packages (from kiwisolver&gt;=1.0.1-&gt;matplotlib&gt;=2.0.0-&gt;scikit-image&gt;=0.11.0-&gt;imgaug==0.2.6) (36.4.0)
-Building wheels for collected packages: imgaug
-  Running setup.py bdist_wheel for imgaug: started
-  Running setup.py bdist_wheel for imgaug: finished with status &#39;done&#39;
-  Stored in directory: /tmp/pip-ephem-wheel-cache-rld6nt6c/wheels/9c/f6/aa/41dcf2f29cc1de1da4ad840ef5393514bead64ac9e644260ff
-Successfully built imgaug
-Installing collected packages: imgaug
-Successfully installed imgaug-0.2.6
-Collecting git+https://www.github.com/keras-team/keras-contrib.git
-  Cloning https://www.github.com/keras-team/keras-contrib.git to /tmp/pip-req-build-1rlj858a
-Requirement already satisfied: keras in /src (from keras-contrib==2.0.8) (2.2.2)
-Requirement already satisfied: numpy&gt;=1.9.1 in /opt/conda/lib/python3.6/site-packages (from keras-&gt;keras-contrib==2.0.8) (1.15.2)
-Requirement already satisfied: scipy&gt;=0.14 in /opt/conda/lib/python3.6/site-packages (from keras-&gt;keras-contrib==2.0.8) (1.1.0)
-Requirement already satisfied: six&gt;=1.9.0 in /opt/conda/lib/python3.6/site-packages (from keras-&gt;keras-contrib==2.0.8) (1.11.0)
-Requirement already satisfied: pyyaml in /opt/conda/lib/python3.6/site-packages (from keras-&gt;keras-contrib==2.0.8) (3.13)
-Requirement already satisfied: h5py in /opt/conda/lib/python3.6/site-packages (from keras-&gt;keras-contrib==2.0.8) (2.8.0)
-Requirement already satisfied: keras_applications==1.0.4 in /opt/conda/lib/python3.6/site-packages (from keras-&gt;keras-contrib==2.0.8) (1.0.4)
-Requirement already satisfied: keras_preprocessing==1.0.2 in /opt/conda/lib/python3.6/site-packages (from keras-&gt;keras-contrib==2.0.8) (1.0.2)
-Building wheels for collected packages: keras-contrib
-  Running setup.py bdist_wheel for keras-contrib: started
-  Running setup.py bdist_wheel for keras-contrib: finished with status &#39;done&#39;
-  Stored in directory: /tmp/pip-ephem-wheel-cache-2yjf080w/wheels/11/27/c8/4ed56de7b55f4f61244e2dc6ef3cdbaff2692527a2ce6502ba
-Successfully built keras-contrib
-Installing collected packages: keras-contrib
-Successfully installed keras-contrib-2.0.8
-Collecting torch==0.4.0 from http://download.pytorch.org/whl/cu90/torch-0.4.0-cp36-cp36m-linux_x86_64.whl
-  Downloading http://download.pytorch.org/whl/cu90/torch-0.4.0-cp36-cp36m-linux_x86_64.whl (566.4MB)
-Collecting torchvision
-  Downloading https://files.pythonhosted.org/packages/ca/0d/f00b2885711e08bd71242ebe7b96561e6f6d01fdb4b9dcf4d37e2e13c5e1/torchvision-0.2.1-py2.py3-none-any.whl (54kB)
-Requirement already satisfied: six in /opt/conda/lib/python3.6/site-packages (from torchvision) (1.11.0)
-Requirement already satisfied: numpy in /opt/conda/lib/python3.6/site-packages (from torchvision) (1.15.2)
-Requirement already satisfied: pillow&gt;=4.1.1 in /opt/conda/lib/python3.6/site-packages (from torchvision) (5.2.0)
-Installing collected packages: torch, torchvision
-Successfully installed torch-0.4.0 torchvision-0.2.1
-Cache location: /opt/conda/pkgs
-Will remove the following tarballs:
-
-/opt/conda/pkgs
----------------
-asn1crypto-0.22.0-py36_0.tar.bz2             148 KB
-snappy-1.1.7-hbae5bb6_3.tar.bz2               38 KB
-cloudpickle-0.5.5-py36_0.tar.bz2              26 KB
-wheel-0.29.0-py36_0.tar.bz2                   88 KB
-jpeg-9b-h024ee3a_2.tar.bz2                   248 KB
-imageio-2.3.0-py_1.tar.bz2                   3.1 MB
-ipython-6.5.0-py36_0.tar.bz2                 1.0 MB
-chardet-3.0.4-py36_1.tar.bz2                 189 KB
-libpng-1.6.34-hb9fc6fc_0.tar.bz2             334 KB
-certifi-2016.2.28-py36_0.tar.bz2             216 KB
-pandas-0.23.4-py36h04863e7_0.tar.bz2        10.1 MB
-dask-0.19.1-py36_0.tar.bz2                     3 KB
-pytables-3.4.4-py36ha205bf6_0.tar.bz2        1.5 MB
-cycler-0.10.0-py36_0.tar.bz2                  13 KB
-ipython_genutils-0.2.0-py36_0.tar.bz2         39 KB
-requests-2.19.1-py36_0.tar.bz2                96 KB
-partd-0.3.8-py36_0.tar.bz2                    31 KB
-pandoc-2.2.3.2-0.tar.bz2                    20.8 MB
-libgpuarray-0.7.6-h14c3975_0.tar.bz2         264 KB
-mistune-0.8.3-py36h14c3975_1.tar.bz2         276 KB
-intel-openmp-2019.0-118.tar.bz2              721 KB
-pysocks-1.6.8-py36_0.tar.bz2                  22 KB
-attrs-18.2.0-py36h28b3542_0.tar.bz2           50 KB
-nose-1.3.7-py36_2.tar.bz2                    214 KB
-pydot-1.2.4-py36_0.tar.bz2                    37 KB
-pycosat-0.6.2-py36_0.tar.bz2                 197 KB
-incremental-17.5.0-py36_0.tar.bz2             25 KB
-setuptools-36.4.0-py36_1.tar.bz2             563 KB
-matplotlib-2.2.3-py36hb69df0a_0.tar.bz2      6.6 MB
-nbconvert-5.3.1-py36_0.tar.bz2               406 KB
-xz-5.2.4-h14c3975_4.tar.bz2                  366 KB
-send2trash-1.5.0-py36_0.tar.bz2               16 KB
-fontconfig-2.13.0-h9420a91_0.tar.bz2         291 KB
-heapdict-1.0.0-py36_2.tar.bz2                  7 KB
-blas-1.0-mkl.tar.bz2                           6 KB
-libglu-9.0.0-hf484d3e_1.tar.bz2              377 KB
-openssl-1.0.2p-h470a237_0.tar.bz2            3.5 MB
-libsodium-1.0.16-h1bed415_0.tar.bz2          302 KB
-opencv-3.4.2-py36h6fd60c2_1.tar.bz2           11 KB
-psutil-5.4.7-py36h14c3975_0.tar.bz2          305 KB
-zope.interface-4.5.0-py36h14c3975_0.tar.bz2     201 KB
-pyasn1-0.4.4-py36h28b3542_0.tar.bz2          101 KB
-dask-core-0.19.1-py36_0.tar.bz2              1.1 MB
-markupsafe-1.0-py36h14c3975_1.tar.bz2         24 KB
-simplegeneric-0.8.1-py36_2.tar.bz2             9 KB
-twisted-18.7.0-py36h14c3975_1.tar.bz2        4.9 MB
-conda-4.3.30-py36h5d9f9f4_0.tar.bz2          511 KB
-sortedcontainers-2.0.5-py36_0.tar.bz2         43 KB
-mkl_fft-1.0.4-py36h4414c95_1.tar.bz2         150 KB
-libxml2-2.9.8-h26e45fe_1.tar.bz2             2.0 MB
-urllib3-1.23-py36_0.tar.bz2                  152 KB
-jinja2-2.10-py36_0.tar.bz2                   184 KB
-cairo-1.14.12-h8948797_3.tar.bz2             1.3 MB
-testpath-0.3.1-py36_0.tar.bz2                 90 KB
-parso-0.3.1-py36_0.tar.bz2                   114 KB
-scipy-1.1.0-py36hfa4b5c9_1.tar.bz2          18.0 MB
-pyopenssl-17.0.0-py36_0.tar.bz2               76 KB
-appdirs-1.4.3-py36h28b3542_0.tar.bz2          16 KB
-prometheus_client-0.3.1-py36h28b3542_0.tar.bz2      52 KB
-cryptography-1.8.1-py36_0.tar.bz2            846 KB
-mkl_random-1.0.1-py36h4414c95_1.tar.bz2      373 KB
-h5py-2.8.0-py36h989c5e5_3.tar.bz2            1.1 MB
-jasper-2.0.14-h07fcdf6_1.tar.bz2             1.1 MB
-locket-0.2.0-py36_1.tar.bz2                    8 KB
-toolz-0.9.0-py36_0.tar.bz2                    91 KB
-libedit-3.1-heed3624_0.tar.bz2               171 KB
-dbus-1.13.2-h714fa37_1.tar.bz2               554 KB
-certifi-2018.8.24-py36_1.tar.bz2             140 KB
-mkl-2019.0-118.tar.bz2                     204.4 MB
-bcolz-1.2.1-py36h04863e7_0.tar.bz2           771 KB
-libopus-1.2.1-hb9ed12e_0.tar.bz2             382 KB
-zeromq-4.2.5-hf484d3e_1.tar.bz2              567 KB
-sip-4.19.8-py36hf484d3e_0.tar.bz2            290 KB
-ncurses-6.0-h9df7e31_2.tar.bz2               920 KB
-pandocfilters-1.4.2-py36_1.tar.bz2            13 KB
-glib-2.56.2-hd408876_0.tar.bz2               5.0 MB
-pcre-8.42-h439df22_0.tar.bz2                 251 KB
-libuuid-1.0.3-h1bed415_2.tar.bz2              16 KB
-backcall-0.1.0-py36_0.tar.bz2                 19 KB
-pygpu-0.7.6-py36h035aef0_0.tar.bz2           702 KB
-numpy-1.15.1-py36h1d66e8a_0.tar.bz2           37 KB
-tqdm-4.26.0-py36h28b3542_0.tar.bz2            59 KB
-pycrypto-2.6.1-py36_6.tar.bz2                477 KB
-freeglut-3.0.0-hf484d3e_5.tar.bz2            251 KB
-wcwidth-0.1.7-py36_0.tar.bz2                  25 KB
-requests-2.14.2-py36_0.tar.bz2               720 KB
-click-6.7-py36_0.tar.bz2                     105 KB
-ruamel_yaml-0.11.14-py36_1.tar.bz2           401 KB
-hdf5-1.10.2-hba1933b_1.tar.bz2               5.2 MB
-entrypoints-0.2.3-py36_2.tar.bz2               9 KB
-gstreamer-1.14.0-hb453b48_1.tar.bz2          3.8 MB
-libopencv-3.4.2-hb342d67_1.tar.bz2          40.4 MB
-py-opencv-3.4.2-py36hb342d67_1.tar.bz2       1.2 MB
-pickleshare-0.7.4-py36_0.tar.bz2              12 KB
-jupyter_core-4.4.0-py36_0.tar.bz2             63 KB
-conda-env-2.6.0-1.tar.bz2                      3 KB
-numpy-base-1.15.1-py36h81de0dd_0.tar.bz2     4.2 MB
-olefile-0.46-py36_0.tar.bz2                   48 KB
-python-3.6.3-hc9025b9_1.tar.bz2             27.0 MB
-libxcb-1.13-h1bed415_1.tar.bz2               502 KB
-blosc-1.14.4-hdbcaa40_0.tar.bz2              601 KB
-decorator-4.3.0-py36_0.tar.bz2                15 KB
-constantly-15.1.0-py36h28b3542_0.tar.bz2      13 KB
-pytz-2018.5-py36_0.tar.bz2                   232 KB
-ffmpeg-4.0-hcdf2ecd_0.tar.bz2               73.7 MB
-icu-58.2-h9c2bf20_1.tar.bz2                 22.5 MB
-ruamel_yaml-0.15.46-py36h14c3975_0.tar.bz2     245 KB
-libtiff-4.0.9-he85c1e1_2.tar.bz2             567 KB
-jedi-0.12.1-py36_0.tar.bz2                   225 KB
-pillow-5.2.0-py36heded4f4_0.tar.bz2          586 KB
-nbformat-4.4.0-py36_0.tar.bz2                141 KB
-kiwisolver-1.0.1-py36hf484d3e_0.tar.bz2       83 KB
-expat-2.2.6-he6710b0_0.tar.bz2               187 KB
-yaml-0.1.7-had09818_2.tar.bz2                 85 KB
-six-1.10.0-py36_0.tar.bz2                     19 KB
-traitlets-4.3.2-py36_0.tar.bz2               133 KB
-pycparser-2.18-py36_0.tar.bz2                167 KB
-conda-4.5.11-py36_0.tar.bz2                  625 KB
-numexpr-2.6.8-py36hd89afb7_0.tar.bz2         190 KB
-pyyaml-3.13-py36h14c3975_0.tar.bz2           178 KB
-python-3.6.2-0.tar.bz2                      16.5 MB
-python-dateutil-2.7.3-py36_0.tar.bz2         260 KB
-libffi-3.2.1-1.tar.bz2                        38 KB
-gmp-6.1.2-h6c8ec71_1.tar.bz2                 744 KB
-certifi-2018.8.24-py36_1001.tar.bz2          139 KB
-hyperlink-18.0.0-py36_0.tar.bz2               62 KB
-readline-7.0-ha6073c6_4.tar.bz2              1.1 MB
-pyparsing-2.2.0-py36_0.tar.bz2                96 KB
-prompt_toolkit-1.0.15-py36_0.tar.bz2         339 KB
-libvpx-1.7.0-h439df22_0.tar.bz2              2.4 MB
-bokeh-0.13.0-py36_0.tar.bz2                  5.0 MB
-ptyprocess-0.6.0-py36_0.tar.bz2               23 KB
-pycosat-0.6.3-py36h14c3975_0.tar.bz2         104 KB
-jupyter_client-5.2.3-py36_0.tar.bz2          124 KB
-terminado-0.8.1-py36_1.tar.bz2                21 KB
-graphite2-1.3.12-h23475e2_2.tar.bz2          106 KB
-sqlite-3.23.1-he433501_0.tar.bz2             1.5 MB
-tornado-5.1-py36h14c3975_0.tar.bz2           666 KB
-zict-0.1.3-py36_0.tar.bz2                     18 KB
-zope-1.0-py36_1.tar.bz2                        3 KB
-msgpack-python-0.5.6-py36h6bb024c_1.tar.bz2      99 KB
-lzo-2.10-h49e0be7_2.tar.bz2                  313 KB
-pip-9.0.1-py36_1.tar.bz2                     1.7 MB
-service_identity-17.0.0-py36h28b3542_0.tar.bz2      18 KB
-pygments-2.2.0-py36_0.tar.bz2                1.3 MB
-idna-2.6-py36_0.tar.bz2                      122 KB
-distributed-1.23.1-py36_0.tar.bz2            829 KB
-packaging-16.8-py36_0.tar.bz2                 30 KB
-tblib-1.3.2-py36_0.tar.bz2                    16 KB
-mako-1.0.7-py36_0.tar.bz2                    116 KB
-gst-plugins-base-1.14.0-hbbd80ab_1.tar.bz2     6.3 MB
-webencodings-0.5.1-py36_1.tar.bz2             19 KB
-zlib-1.2.11-ha838bed_2.tar.bz2               101 KB
-six-1.11.0-py36_1.tar.bz2                     21 KB
-libgcc-ng-8.2.0-hdf63c60_1.tar.bz2           7.6 MB
-html5lib-1.0.1-py36_0.tar.bz2                184 KB
-qt-5.9.6-h52aff34_0.tar.bz2                 86.7 MB
-pyqt-5.9.2-py36h05f1152_2.tar.bz2            5.6 MB
-ca-certificates-2018.8.24-ha4d7672_0.tar.bz2     136 KB
-pixman-0.34.0-hceecf20_3.tar.bz2             598 KB
-harfbuzz-1.8.8-hffaf4a1_0.tar.bz2            863 KB
-pexpect-4.6.0-py36_0.tar.bz2                  77 KB
-tk-8.6.8-hbc83047_0.tar.bz2                  3.1 MB
-libgfortran-ng-7.3.0-hdf63c60_0.tar.bz2      1.3 MB
-bleach-2.1.4-py36_0.tar.bz2                   33 KB
-pyzmq-17.1.2-py36h14c3975_0.tar.bz2          454 KB
-jsonschema-2.6.0-py36_0.tar.bz2               62 KB
-automat-0.7.0-py36_0.tar.bz2                  52 KB
-cffi-1.10.0-py36_0.tar.bz2                   341 KB
-notebook-5.6.0-py36_0.tar.bz2                7.4 MB
-bzip2-1.0.6-h14c3975_5.tar.bz2               414 KB
-ipykernel-4.9.0-py36_1.tar.bz2               146 KB
-scikit-learn-0.19.2-py36h4989274_0.tar.bz2     5.2 MB
-pyasn1-modules-0.2.2-py36_0.tar.bz2           86 KB
-cytoolz-0.9.0.1-py36h14c3975_1.tar.bz2       419 KB
-freetype-2.9.1-h8a8886c_1.tar.bz2            822 KB
-libstdcxx-ng-8.2.0-hdf63c60_1.tar.bz2        2.9 MB
-
----------------------------------------------------
-Total:                                     648.2 MB
-
-Removed asn1crypto-0.22.0-py36_0.tar.bz2
-Removed snappy-1.1.7-hbae5bb6_3.tar.bz2
-Removed cloudpickle-0.5.5-py36_0.tar.bz2
-Removed wheel-0.29.0-py36_0.tar.bz2
-Removed jpeg-9b-h024ee3a_2.tar.bz2
-Removed imageio-2.3.0-py_1.tar.bz2
-Removed ipython-6.5.0-py36_0.tar.bz2
-Removed chardet-3.0.4-py36_1.tar.bz2
-Removed libpng-1.6.34-hb9fc6fc_0.tar.bz2
-Removed certifi-2016.2.28-py36_0.tar.bz2
-Removed pandas-0.23.4-py36h04863e7_0.tar.bz2
-Removed dask-0.19.1-py36_0.tar.bz2
-Removed pytables-3.4.4-py36ha205bf6_0.tar.bz2
-Removed cycler-0.10.0-py36_0.tar.bz2
-Removed ipython_genutils-0.2.0-py36_0.tar.bz2
-Removed requests-2.19.1-py36_0.tar.bz2
-Removed partd-0.3.8-py36_0.tar.bz2
-Removed pandoc-2.2.3.2-0.tar.bz2
-Removed libgpuarray-0.7.6-h14c3975_0.tar.bz2
-Removed mistune-0.8.3-py36h14c3975_1.tar.bz2
-Removed intel-openmp-2019.0-118.tar.bz2
-Removed pysocks-1.6.8-py36_0.tar.bz2
-Removed attrs-18.2.0-py36h28b3542_0.tar.bz2
-Removed nose-1.3.7-py36_2.tar.bz2
-Removed pydot-1.2.4-py36_0.tar.bz2
-Removed pycosat-0.6.2-py36_0.tar.bz2
-Removed incremental-17.5.0-py36_0.tar.bz2
-Removed setuptools-36.4.0-py36_1.tar.bz2
-Removed matplotlib-2.2.3-py36hb69df0a_0.tar.bz2
-Removed nbconvert-5.3.1-py36_0.tar.bz2
-Removed xz-5.2.4-h14c3975_4.tar.bz2
-Removed send2trash-1.5.0-py36_0.tar.bz2
-Removed fontconfig-2.13.0-h9420a91_0.tar.bz2
-Removed heapdict-1.0.0-py36_2.tar.bz2
-Removed blas-1.0-mkl.tar.bz2
-Removed libglu-9.0.0-hf484d3e_1.tar.bz2
-Removed openssl-1.0.2p-h470a237_0.tar.bz2
-Removed libsodium-1.0.16-h1bed415_0.tar.bz2
-Removed opencv-3.4.2-py36h6fd60c2_1.tar.bz2
-Removed psutil-5.4.7-py36h14c3975_0.tar.bz2
-Removed zope.interface-4.5.0-py36h14c3975_0.tar.bz2
-Removed pyasn1-0.4.4-py36h28b3542_0.tar.bz2
-Removed dask-core-0.19.1-py36_0.tar.bz2
-Removed markupsafe-1.0-py36h14c3975_1.tar.bz2
-Removed simplegeneric-0.8.1-py36_2.tar.bz2
-Removed twisted-18.7.0-py36h14c3975_1.tar.bz2
-Removed conda-4.3.30-py36h5d9f9f4_0.tar.bz2
-Removed sortedcontainers-2.0.5-py36_0.tar.bz2
-Removed mkl_fft-1.0.4-py36h4414c95_1.tar.bz2
-Removed libxml2-2.9.8-h26e45fe_1.tar.bz2
-Removed urllib3-1.23-py36_0.tar.bz2
-Removed jinja2-2.10-py36_0.tar.bz2
-Removed cairo-1.14.12-h8948797_3.tar.bz2
-Removed testpath-0.3.1-py36_0.tar.bz2
-Removed parso-0.3.1-py36_0.tar.bz2
-Removed scipy-1.1.0-py36hfa4b5c9_1.tar.bz2
-Removed pyopenssl-17.0.0-py36_0.tar.bz2
-Removed appdirs-1.4.3-py36h28b3542_0.tar.bz2
-Removed prometheus_client-0.3.1-py36h28b3542_0.tar.bz2
-Removed cryptography-1.8.1-py36_0.tar.bz2
-Removed mkl_random-1.0.1-py36h4414c95_1.tar.bz2
-Removed h5py-2.8.0-py36h989c5e5_3.tar.bz2
-Removed jasper-2.0.14-h07fcdf6_1.tar.bz2
-Removed locket-0.2.0-py36_1.tar.bz2
-Removed toolz-0.9.0-py36_0.tar.bz2
-Removed libedit-3.1-heed3624_0.tar.bz2
-Removed dbus-1.13.2-h714fa37_1.tar.bz2
-Removed certifi-2018.8.24-py36_1.tar.bz2
-Removed mkl-2019.0-118.tar.bz2
-Removed bcolz-1.2.1-py36h04863e7_0.tar.bz2
-Removed libopus-1.2.1-hb9ed12e_0.tar.bz2
-Removed zeromq-4.2.5-hf484d3e_1.tar.bz2
-Removed sip-4.19.8-py36hf484d3e_0.tar.bz2
-Removed ncurses-6.0-h9df7e31_2.tar.bz2
-Removed pandocfilters-1.4.2-py36_1.tar.bz2
-Removed glib-2.56.2-hd408876_0.tar.bz2
-Removed pcre-8.42-h439df22_0.tar.bz2
-Removed libuuid-1.0.3-h1bed415_2.tar.bz2
-Removed backcall-0.1.0-py36_0.tar.bz2
-Removed pygpu-0.7.6-py36h035aef0_0.tar.bz2
-Removed numpy-1.15.1-py36h1d66e8a_0.tar.bz2
-Removed tqdm-4.26.0-py36h28b3542_0.tar.bz2
-Removed pycrypto-2.6.1-py36_6.tar.bz2
-Removed freeglut-3.0.0-hf484d3e_5.tar.bz2
-Removed wcwidth-0.1.7-py36_0.tar.bz2
-Removed requests-2.14.2-py36_0.tar.bz2
-Removed click-6.7-py36_0.tar.bz2
-Removed ruamel_yaml-0.11.14-py36_1.tar.bz2
-Removed hdf5-1.10.2-hba1933b_1.tar.bz2
-Removed entrypoints-0.2.3-py36_2.tar.bz2
-Removed gstreamer-1.14.0-hb453b48_1.tar.bz2
-Removed libopencv-3.4.2-hb342d67_1.tar.bz2
-Removed py-opencv-3.4.2-py36hb342d67_1.tar.bz2
-Removed pickleshare-0.7.4-py36_0.tar.bz2
-Removed jupyter_core-4.4.0-py36_0.tar.bz2
-Removed conda-env-2.6.0-1.tar.bz2
-Removed numpy-base-1.15.1-py36h81de0dd_0.tar.bz2
-Removed olefile-0.46-py36_0.tar.bz2
-Removed python-3.6.3-hc9025b9_1.tar.bz2
-Removed libxcb-1.13-h1bed415_1.tar.bz2
-Removed blosc-1.14.4-hdbcaa40_0.tar.bz2
-Removed decorator-4.3.0-py36_0.tar.bz2
-Removed constantly-15.1.0-py36h28b3542_0.tar.bz2
-Removed pytz-2018.5-py36_0.tar.bz2
-Removed ffmpeg-4.0-hcdf2ecd_0.tar.bz2
-Removed icu-58.2-h9c2bf20_1.tar.bz2
-Removed ruamel_yaml-0.15.46-py36h14c3975_0.tar.bz2
-Removed libtiff-4.0.9-he85c1e1_2.tar.bz2
-Removed jedi-0.12.1-py36_0.tar.bz2
-Removed pillow-5.2.0-py36heded4f4_0.tar.bz2
-Removed nbformat-4.4.0-py36_0.tar.bz2
-Removed kiwisolver-1.0.1-py36hf484d3e_0.tar.bz2
-Removed expat-2.2.6-he6710b0_0.tar.bz2
-Removed yaml-0.1.7-had09818_2.tar.bz2
-Removed six-1.10.0-py36_0.tar.bz2
-Removed traitlets-4.3.2-py36_0.tar.bz2
-Removed pycparser-2.18-py36_0.tar.bz2
-Removed conda-4.5.11-py36_0.tar.bz2
-Removed numexpr-2.6.8-py36hd89afb7_0.tar.bz2
-Removed pyyaml-3.13-py36h14c3975_0.tar.bz2
-Removed python-3.6.2-0.tar.bz2
-Removed python-dateutil-2.7.3-py36_0.tar.bz2
-Removed libffi-3.2.1-1.tar.bz2
-Removed gmp-6.1.2-h6c8ec71_1.tar.bz2
-Removed certifi-2018.8.24-py36_1001.tar.bz2
-Removed hyperlink-18.0.0-py36_0.tar.bz2
-Removed readline-7.0-ha6073c6_4.tar.bz2
-Removed pyparsing-2.2.0-py36_0.tar.bz2
-Removed prompt_toolkit-1.0.15-py36_0.tar.bz2
-Removed libvpx-1.7.0-h439df22_0.tar.bz2
-Removed bokeh-0.13.0-py36_0.tar.bz2
-Removed ptyprocess-0.6.0-py36_0.tar.bz2
-Removed pycosat-0.6.3-py36h14c3975_0.tar.bz2
-Removed jupyter_client-5.2.3-py36_0.tar.bz2
-Removed terminado-0.8.1-py36_1.tar.bz2
-Removed graphite2-1.3.12-h23475e2_2.tar.bz2
-Removed sqlite-3.23.1-he433501_0.tar.bz2
-Removed tornado-5.1-py36h14c3975_0.tar.bz2
-Removed zict-0.1.3-py36_0.tar.bz2
-Removed zope-1.0-py36_1.tar.bz2
-Removed msgpack-python-0.5.6-py36h6bb024c_1.tar.bz2
-Removed lzo-2.10-h49e0be7_2.tar.bz2
-Removed pip-9.0.1-py36_1.tar.bz2
-Removed service_identity-17.0.0-py36h28b3542_0.tar.bz2
-Removed pygments-2.2.0-py36_0.tar.bz2
-Removed idna-2.6-py36_0.tar.bz2
-Removed distributed-1.23.1-py36_0.tar.bz2
-Removed packaging-16.8-py36_0.tar.bz2
-Removed tblib-1.3.2-py36_0.tar.bz2
-Removed mako-1.0.7-py36_0.tar.bz2
-Removed gst-plugins-base-1.14.0-hbbd80ab_1.tar.bz2
-Removed webencodings-0.5.1-py36_1.tar.bz2
-Removed zlib-1.2.11-ha838bed_2.tar.bz2
-Removed six-1.11.0-py36_1.tar.bz2
-Removed libgcc-ng-8.2.0-hdf63c60_1.tar.bz2
-Removed html5lib-1.0.1-py36_0.tar.bz2
-Removed qt-5.9.6-h52aff34_0.tar.bz2
-Removed pyqt-5.9.2-py36h05f1152_2.tar.bz2
-Removed ca-certificates-2018.8.24-ha4d7672_0.tar.bz2
-Removed pixman-0.34.0-hceecf20_3.tar.bz2
-Removed harfbuzz-1.8.8-hffaf4a1_0.tar.bz2
-Removed pexpect-4.6.0-py36_0.tar.bz2
-Removed tk-8.6.8-hbc83047_0.tar.bz2
-Removed libgfortran-ng-7.3.0-hdf63c60_0.tar.bz2
-Removed bleach-2.1.4-py36_0.tar.bz2
-Removed pyzmq-17.1.2-py36h14c3975_0.tar.bz2
-Removed jsonschema-2.6.0-py36_0.tar.bz2
-Removed automat-0.7.0-py36_0.tar.bz2
-Removed cffi-1.10.0-py36_0.tar.bz2
-Removed notebook-5.6.0-py36_0.tar.bz2
-Removed bzip2-1.0.6-h14c3975_5.tar.bz2
-Removed ipykernel-4.9.0-py36_1.tar.bz2
-Removed scikit-learn-0.19.2-py36h4989274_0.tar.bz2
-Removed pyasn1-modules-0.2.2-py36_0.tar.bz2
-Removed cytoolz-0.9.0.1-py36h14c3975_1.tar.bz2
-Removed freetype-2.9.1-h8a8886c_1.tar.bz2
-Removed libstdcxx-ng-8.2.0-hdf63c60_1.tar.bz2
+imageio-2.3.0        | 3.1 MB    | ##################################### | 100% 
+ca-certificates-2018 | 136 KB    | ##################################### | 100% 
+conda-4.5.11         | 625 KB    | ##################################### | 100% 
+certifi-2018.8.24    | 139 KB    | ##################################### | 100% 
+openssl-1.0.2p       | 3.5 MB    | ##################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
 </pre>
 </div>
 </div>
@@ -13204,10 +12092,82 @@ Removed libstdcxx-ng-8.2.0-hdf63c60_1.tar.bz2
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>docker push <span class="nv">$docker_image_name</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_DEVICE_ORDER&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PCI_BUS_ID&quot;</span>  <span class="c1"># see issue #152</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;0,1&quot;</span>
+
+<span class="kn">import</span> <span class="nn">imgaug</span> <span class="k">as</span> <span class="nn">ia</span>
+<span class="kn">from</span> <span class="nn">imgaug</span> <span class="k">import</span> <span class="n">augmenters</span> <span class="k">as</span> <span class="n">iaa</span>
+<span class="n">ia</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
+<span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="k">import</span> <span class="n">Adam</span>
+<span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="k">import</span> <span class="n">ReduceLROnPlateau</span><span class="p">,</span> <span class="n">Callback</span><span class="p">,</span> <span class="n">ModelCheckpoint</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">keras_contrib.applications.densenet</span> <span class="k">import</span> <span class="n">DenseNetImageNet121</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.utils</span> <span class="k">import</span> <span class="n">multi_gpu_model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.client</span> <span class="k">import</span> <span class="n">device_lib</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">keras.utils</span> <span class="k">import</span> <span class="n">Sequence</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Using TensorFlow backend.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For testing purpose, we just run 1 epoch. It will take around 25 mins to run for one epoch using 2 K80 GPUs and it is usually needed to run around 30~50 epochs for the model to get converge.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># make force_restart = False if you continue a previous train session, make it True to start from scratch</span>
+<span class="n">force_restart</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">initial_lr</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">resized_height</span> <span class="o">=</span> <span class="mi">224</span>
+<span class="n">resized_width</span> <span class="o">=</span> <span class="mi">224</span>
+<span class="c1"># resized_height = prj_consts.CHESTXRAY_MODEL_EXPECTED_IMAGE_HEIGHT</span>
+<span class="c1"># resized_width = prj_consts.CHESTXRAY_MODEL_EXPECTED_IMAGE_WIDTH</span>
+<span class="n">num_channel</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">num_classes</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">#200</span>
 </pre></div>
 
 </div>
@@ -13217,10 +12177,12 @@ Removed libstdcxx-ng-8.2.0-hdf63c60_1.tar.bz2
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">echo</span> sudo nvidia-docker run -i -t -p <span class="m">10003</span>:8888 -v <span class="s1">&#39;$(pwd)&#39;</span>:/local_dir:rw georgedockeraccount/chestxray-no-aml-gpu:1.0.0 /bin/bash -c <span class="s1">&#39;&quot;/opt/conda/bin/jupyter notebook --notebook-dir=/local_dir --ip=&#39;</span>*<span class="s1">&#39; --port=8888 --no-browser --allow-root&quot;&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># gpu_fraction = 0.4</span>
+<span class="c1"># gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=gpu_fraction)</span>
+<span class="c1"># sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))</span>
 </pre></div>
 
 </div>
@@ -13230,10 +12192,427 @@ Removed libstdcxx-ng-8.2.0-hdf63c60_1.tar.bz2
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sess.close</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_available_gpus</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Returns: number of GPUs available in the system</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">local_device_protos</span> <span class="o">=</span> <span class="n">device_lib</span><span class="o">.</span><span class="n">list_local_devices</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">local_device_protos</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">device_type</span> <span class="o">==</span> <span class="s1">&#39;GPU&#39;</span><span class="p">]</span>
+
+
+<span class="c1"># get number of available GPUs</span>
+<span class="n">num_gpu</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">get_available_gpus</span><span class="p">())</span>
+<span class="n">num_gpu</span>
+
+<span class="c1"># keras multi_gpu_model slices the data to different GPUs. see https://keras.io/utils/#multi_gpu_model for more details.</span>
+<span class="n">batch_size</span> <span class="o">=</span><span class="n">num_gpu</span> <span class="o">*</span>  <span class="mi">2</span> <span class="c1">#4 #* 48  </span>
+
+
+<span class="c1"># use Keras multi-gpu model, so we need to make sure the batch_size is divisible by num_gpu.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># device_lib.list_local_devices()</span>
+<span class="c1"># !nvidia-smi</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># use Keras multi-gpu model, so we need to make sure the batch_size is divisible by num_gpu.</span>
+
+<span class="c1"># multi GPU model checkpoint. copied from https://github.com/keras-team/keras/issues/8463</span>
+<span class="k">class</span> <span class="nc">MultiGPUCheckpointCallback</span><span class="p">(</span><span class="n">Callback</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">base_model</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">save_best_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_weights_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MultiGPUCheckpointCallback</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_model</span> <span class="o">=</span> <span class="n">base_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span> <span class="o">=</span> <span class="n">monitor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_best_only</span> <span class="o">=</span> <span class="n">save_best_only</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_weights_only</span> <span class="o">=</span> <span class="n">save_weights_only</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">period</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epochs_since_last_save</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">]:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;ModelCheckpoint mode </span><span class="si">%s</span><span class="s1"> is unknown, &#39;</span>
+                          <span class="s1">&#39;fallback to auto mode.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">mode</span><span class="p">),</span>
+                          <span class="ne">RuntimeWarning</span><span class="p">)</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">monitor_op</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">less</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">Inf</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">monitor_op</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">greater</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">best</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">Inf</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;acc&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;fmeasure&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">monitor_op</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">greater</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">best</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">Inf</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">monitor_op</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">less</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">Inf</span>
+
+    <span class="k">def</span> <span class="nf">on_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">logs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">logs</span> <span class="o">=</span> <span class="n">logs</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epochs_since_last_save</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">epochs_since_last_save</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">period</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">epochs_since_last_save</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">logs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_best_only</span><span class="p">:</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="n">logs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Can save best model only with </span><span class="si">%s</span><span class="s1"> available, &#39;</span>
+                                  <span class="s1">&#39;skipping.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="p">),</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitor_op</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch </span><span class="si">%05d</span><span class="s1">: </span><span class="si">%s</span><span class="s1"> improved from </span><span class="si">%0.5f</span><span class="s1"> to </span><span class="si">%0.5f</span><span class="s1">,&#39;</span>
+                                  <span class="s1">&#39; saving model to </span><span class="si">%s</span><span class="s1">&#39;</span>
+                                  <span class="o">%</span> <span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">best</span><span class="p">,</span>
+                                     <span class="n">current</span><span class="p">,</span> <span class="n">filepath</span><span class="p">))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">best</span> <span class="o">=</span> <span class="n">current</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_weights_only</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">base_model</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">base_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch </span><span class="si">%05d</span><span class="s1">: </span><span class="si">%s</span><span class="s1"> did not improve&#39;</span> <span class="o">%</span>
+                                  <span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch </span><span class="si">%05d</span><span class="s1">: saving model to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">filepath</span><span class="p">))</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_weights_only</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">base_model</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">base_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="n">seq</span> <span class="o">=</span> <span class="n">iaa</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">iaa</span><span class="o">.</span><span class="n">Fliplr</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>  <span class="c1"># horizontal flips</span>
+    <span class="n">iaa</span><span class="o">.</span><span class="n">Affine</span><span class="p">(</span><span class="n">rotate</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">)),</span>  <span class="c1"># random rotate image</span>
+    <span class="n">iaa</span><span class="o">.</span><span class="n">Affine</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)),</span>  <span class="c1"># randomly scale the image</span>
+<span class="p">],</span> <span class="n">random_order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># apply augmenters in random order</span>
+
+
+<span class="c1"># generator for train and validation data</span>
+<span class="c1"># use the Sequence class per issue https://github.com/keras-team/keras/issues/1638</span>
+<span class="k">class</span> <span class="nc">DataGenSequence</span><span class="p">(</span><span class="n">Sequence</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">image_file_index</span><span class="p">,</span> <span class="n">current_state</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">img_file_index</span> <span class="o">=</span> <span class="n">image_file_index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span> <span class="o">=</span> <span class="n">current_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_file_index</span><span class="p">)</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;for DataGenSequence&quot;</span><span class="p">,</span> <span class="n">current_state</span><span class="p">,</span> <span class="s2">&quot;total rows are:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_file_index</span><span class="p">),</span> <span class="s2">&quot;, len is&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">len</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">len</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="c1"># print(&quot;loading data segmentation&quot;, idx)</span>
+        <span class="c1"># make sure each batch size has the same amount of data</span>
+        <span class="n">current_batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_file_index</span><span class="p">[</span><span class="n">idx</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">:</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">]</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">resized_height</span><span class="p">,</span> <span class="n">resized_width</span><span class="p">,</span> <span class="n">num_channel</span><span class="p">))</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">image_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">current_batch</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nih_chest_xray_data_dir</span><span class="p">,</span> <span class="n">image_name</span><span class="p">)</span>
+            <span class="c1"># loading data</span>
+
+            <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="p">(</span><span class="n">resized_height</span><span class="p">,</span> <span class="n">resized_width</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">img</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">image_name</span><span class="p">]</span>
+
+            <span class="c1"># only do random flipping in training status</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
+            <span class="n">x_augmented</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">augment_images</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x_augmented</span> <span class="o">=</span> <span class="n">X</span>
+
+        <span class="k">return</span> <span class="n">x_augmented</span><span class="p">,</span> <span class="n">y</span>
+
+
+<span class="c1"># loss function</span>
+<span class="k">def</span> <span class="nf">unweighted_binary_crossentropy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        y_true: true labels</span>
+<span class="sd">        y_pred: predicted labels</span>
+
+<span class="sd">    Returns: the sum of binary cross entropy loss across all the classes</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">K</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">binary_crossentropy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">build_model</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Returns: a model with specified weights</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># define the model, use pre-trained weights for image_net</span>
+    <span class="n">base_model</span> <span class="o">=</span> <span class="n">DenseNetImageNet121</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                                     <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span>
+                                     <span class="n">include_top</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                     <span class="n">pooling</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">base_model</span><span class="o">.</span><span class="n">output</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">base_model</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">predictions</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">num_gpu</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;using&quot;</span><span class="p">,</span> <span class="n">num_gpu</span><span class="p">,</span> <span class="s2">&quot;GPUs&quot;</span><span class="p">)</span>
+    <span class="c1"># build model</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;/cpu:0&#39;</span><span class="p">):</span>
+        <span class="n">model_single_gpu</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">()</span>
+    <span class="c1"># model_single_gpu.load_weights(weights_path)</span>
+
+    <span class="c1"># convert to multi-gpu model</span>
+    <span class="n">model_multi_gpu</span> <span class="o">=</span> <span class="n">multi_gpu_model</span><span class="p">(</span><span class="n">model_single_gpu</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="n">num_gpu</span><span class="p">)</span>
+    <span class="n">model_checkpoint</span> <span class="o">=</span> <span class="n">MultiGPUCheckpointCallback</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">weights_dir</span><span class="p">,</span> <span class="s1">&#39;azure_chest_xray_14_weights_712split_epoch_</span><span class="si">{epoch:03d}</span><span class="s1">_val_loss_</span><span class="si">{val_loss:.4f}</span><span class="s1">.hdf5&#39;</span><span class="p">),</span>
+        <span class="n">model_single_gpu</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">save_weights_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;using single GPU&quot;</span><span class="p">)</span>
+    <span class="n">model_multi_gpu</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">()</span>
+    <span class="n">model_checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">weights_dir</span><span class="p">,</span> <span class="s1">&#39;azure_chest_xray_14_weights_712split_epoch_</span><span class="si">{epoch:03d}</span><span class="s1">_val_loss_</span><span class="si">{val_loss:.4f}</span><span class="s1">.hdf5&#39;</span><span class="p">),</span>
+        <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">save_weights_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>using 2 GPUs
+Downloading data from https://github.com/titu1994/DenseNet/releases/download/v3.0/DenseNet-BC-121-32-no-top.h5
+33202176/33199896 [==============================] - 2s 0us/step
+Weights for the model were loaded successfully
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">num_workers</span> <span class="o">=</span> <span class="n">num_gpu</span><span class="o">*</span><span class="mi">2</span> <span class="c1">#*10</span>
+
+<span class="n">model_multi_gpu</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="n">initial_lr</span><span class="p">),</span> <span class="n">loss</span><span class="o">=</span><span class="n">unweighted_binary_crossentropy</span><span class="p">)</span>
+
+<span class="n">reduce_lr_on_plateau</span> <span class="o">=</span> <span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_lr</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+
+<span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">model_checkpoint</span><span class="p">,</span> <span class="n">reduce_lr_on_plateau</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">label_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">partition_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">partition</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">model_multi_gpu</span><span class="o">.</span><span class="n">fit_generator</span><span class="p">(</span><span class="n">generator</span><span class="o">=</span><span class="n">DataGenSequence</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">partition</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span> <span class="n">current_state</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">),</span>
+                              <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
+                              <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                              <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+                              <span class="n">workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">,</span>
+                              <span class="c1"># max_queue_size=32,</span>
+                              <span class="c1"># shuffle=False,</span>
+                              <span class="n">validation_data</span><span class="o">=</span><span class="n">DataGenSequence</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">partition</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">],</span> <span class="n">current_state</span><span class="o">=</span><span class="s1">&#39;validation&#39;</span><span class="p">)</span>
+                              <span class="c1"># validation_steps=1</span>
+                              <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>for DataGenSequence train total rows are: 68508 , len is 17127
+for DataGenSequence validation total rows are: 9495 , len is 2373
+Epoch 1/2
+ 1622/17127 [=&gt;............................] - ETA: 1:25:30 - loss: 11.0062</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-20-a909811f231f&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">     20</span>                               <span class="ansi-red-fg"># max_queue_size=32,</span>
+<span class="ansi-green-intense-fg ansi-bold">     21</span>                               <span class="ansi-red-fg"># shuffle=False,</span>
+<span class="ansi-green-fg">---&gt; 22</span><span class="ansi-red-fg">                               </span>validation_data<span class="ansi-blue-fg">=</span>DataGenSequence<span class="ansi-blue-fg">(</span>labels<span class="ansi-blue-fg">,</span> partition<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;valid&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> current_state<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;validation&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     23</span>                               <span class="ansi-red-fg"># validation_steps=1</span>
+<span class="ansi-green-intense-fg ansi-bold">     24</span>                               )
+
+<span class="ansi-green-fg">/src/keras/legacy/interfaces.py</span> in <span class="ansi-cyan-fg">wrapper</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     89</span>                 warnings.warn(&#39;Update your `&#39; + object_name + &#39;` call to the &#39; +
+<span class="ansi-green-intense-fg ansi-bold">     90</span>                               &#39;Keras 2 API: &#39; + signature, stacklevel=2)
+<span class="ansi-green-fg">---&gt; 91</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     92</span>         wrapper<span class="ansi-blue-fg">.</span>_original_function <span class="ansi-blue-fg">=</span> func
+<span class="ansi-green-intense-fg ansi-bold">     93</span>         <span class="ansi-green-fg">return</span> wrapper
+
+<span class="ansi-green-fg">/src/keras/engine/training.py</span> in <span class="ansi-cyan-fg">fit_generator</span><span class="ansi-blue-fg">(self, generator, steps_per_epoch, epochs, verbose, callbacks, validation_data, validation_steps, class_weight, max_queue_size, workers, use_multiprocessing, shuffle, initial_epoch)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1411</span>             use_multiprocessing<span class="ansi-blue-fg">=</span>use_multiprocessing<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1412</span>             shuffle<span class="ansi-blue-fg">=</span>shuffle<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">-&gt; 1413</span><span class="ansi-red-fg">             initial_epoch=initial_epoch)
+</span><span class="ansi-green-intense-fg ansi-bold">   1414</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1415</span>     <span class="ansi-blue-fg">@</span>interfaces<span class="ansi-blue-fg">.</span>legacy_generator_methods_support
+
+<span class="ansi-green-fg">/src/keras/engine/training_generator.py</span> in <span class="ansi-cyan-fg">fit_generator</span><span class="ansi-blue-fg">(model, generator, steps_per_epoch, epochs, verbose, callbacks, validation_data, validation_steps, class_weight, max_queue_size, workers, use_multiprocessing, shuffle, initial_epoch)</span>
+<span class="ansi-green-intense-fg ansi-bold">    212</span>                 outs = model.train_on_batch(x, y,
+<span class="ansi-green-intense-fg ansi-bold">    213</span>                                             sample_weight<span class="ansi-blue-fg">=</span>sample_weight<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 214</span><span class="ansi-red-fg">                                             class_weight=class_weight)
+</span><span class="ansi-green-intense-fg ansi-bold">    215</span> 
+<span class="ansi-green-intense-fg ansi-bold">    216</span>                 outs <span class="ansi-blue-fg">=</span> to_list<span class="ansi-blue-fg">(</span>outs<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/src/keras/engine/training.py</span> in <span class="ansi-cyan-fg">train_on_batch</span><span class="ansi-blue-fg">(self, x, y, sample_weight, class_weight)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1211</span>             ins <span class="ansi-blue-fg">=</span> x <span class="ansi-blue-fg">+</span> y <span class="ansi-blue-fg">+</span> sample_weights
+<span class="ansi-green-intense-fg ansi-bold">   1212</span>         self<span class="ansi-blue-fg">.</span>_make_train_function<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">-&gt; 1213</span><span class="ansi-red-fg">         </span>outputs <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>train_function<span class="ansi-blue-fg">(</span>ins<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1214</span>         <span class="ansi-green-fg">return</span> unpack_singleton<span class="ansi-blue-fg">(</span>outputs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1215</span> 
+
+<span class="ansi-green-fg">/src/keras/backend/tensorflow_backend.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, inputs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2713</span>                 <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_legacy_call<span class="ansi-blue-fg">(</span>inputs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2714</span> 
+<span class="ansi-green-fg">-&gt; 2715</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_call<span class="ansi-blue-fg">(</span>inputs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2716</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   2717</span>             <span class="ansi-green-fg">if</span> py_any<span class="ansi-blue-fg">(</span>is_tensor<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> x <span class="ansi-green-fg">in</span> inputs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/src/keras/backend/tensorflow_backend.py</span> in <span class="ansi-cyan-fg">_call</span><span class="ansi-blue-fg">(self, inputs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2673</span>             fetched <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_callable_fn<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>array_vals<span class="ansi-blue-fg">,</span> run_metadata<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>run_metadata<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2674</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 2675</span><span class="ansi-red-fg">             </span>fetched <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_callable_fn<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>array_vals<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2676</span>         <span class="ansi-green-fg">return</span> fetched<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">:</span>len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>outputs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">   2677</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1380</span>           ret = tf_session.TF_SessionRunCallable(
+<span class="ansi-green-intense-fg ansi-bold">   1381</span>               self<span class="ansi-blue-fg">.</span>_session<span class="ansi-blue-fg">.</span>_session<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>_handle<span class="ansi-blue-fg">,</span> args<span class="ansi-blue-fg">,</span> status<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">-&gt; 1382</span><span class="ansi-red-fg">               run_metadata_ptr)
+</span><span class="ansi-green-intense-fg ansi-bold">   1383</span>         <span class="ansi-green-fg">if</span> run_metadata<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1384</span>           proto_data <span class="ansi-blue-fg">=</span> tf_session<span class="ansi-blue-fg">.</span>TF_GetBuffer<span class="ansi-blue-fg">(</span>run_metadata_ptr<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter nbconvert --to html 00_create_docker_image.ipynb
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter nbconvert --to html 010_train.ipynb
 </pre></div>
 
 </div>
