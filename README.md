@@ -31,11 +31,10 @@ docker login
 ```
 * [Get rid of sudo](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user) in cli if you wish so:
 ```
-https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
 sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
-* Update install a few system libs:
+* Update/install a few system libs:
 ```
 sudo apt-get update
 pip install --upgrade pip
@@ -82,9 +81,12 @@ nvidia-docker run -i -t -p 10003:8888 -v $(pwd):/local_dir:rw ...
 tmux new -s jupyter_srvr_docker
 nvidia-docker run -i -t -p 10003:8888 -v $(pwd):/local_dir:rw georgedockeraccount/chestxray-no-aml-gpu:1.0.0 /bin/bash -c "/opt/conda/bin/jupyter notebook --notebook-dir=/local_dir --ip=* --port=8888 --no-browser --allow-root"
 ```
+* You can nonnect to the training dockerized Jupyter notebook server from your local machine by using the other port (e.g. __10003__ below) and the tocken reported by the server on the VM in the tmux session:
+```
+http://ghiordtlvisgpvm.southcentralus.cloudapp.azure.com:10003/some_token
+```
 * Follow the project notebooks (use edit_python_files.ipynb to edit .py files as needed):
   - AzureChestXRayNoAML/code/01_DataPrep/001_get_data.ipynb to get the data (from the storage account where you downloaded NIH image data and auxiliary files (BBox_List_2017.csv, blacklist.csv and Data_Entry_2017.csv)
   - AzureChestXRayNoAML/code/02_Model/000_preprocess.ipynb
   - AzureChestXRayNoAML/code/02_Model/010_train.ipynb
   
-
