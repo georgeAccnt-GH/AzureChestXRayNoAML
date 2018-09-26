@@ -11820,7 +11820,7 @@ div#notebook {
 <span class="k">try</span><span class="p">:</span>
     <span class="n">amlWBSharedDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;AZUREML_NATIVE_SHARE_DIRECTORY&#39;</span><span class="p">]</span>    
 <span class="k">except</span><span class="p">:</span>
-    <span class="n">amlWBSharedDir</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;..&#39;</span><span class="p">])))</span>
+    <span class="n">amlWBSharedDir</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">])))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;not using AML Workbench?&#39;</span><span class="p">)</span>
     
 <span class="n">amlWBSharedDir</span>
@@ -11853,7 +11853,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/02_Model/..&#39;</pre>
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/02_Model/../../../..&#39;</pre>
 </div>
 
 </div>
@@ -11894,13 +11894,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import utlity functions</span>
 
 <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
-<span class="n">paths_to_append</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;src&#39;</span><span class="p">])))]</span>
+<span class="n">paths_to_append</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;src&#39;</span><span class="p">])))]</span>
 <span class="k">def</span> <span class="nf">add_path_to_sys_path</span><span class="p">(</span><span class="n">path_to_append</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="n">path_to_append</span> <span class="ow">in</span> <span class="n">paths</span> <span class="k">for</span> <span class="n">paths</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)):</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_to_append</span><span class="p">)</span>
@@ -11920,7 +11920,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -11945,7 +11945,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create base directories for the file path variables </span>
@@ -11953,8 +11953,8 @@ div#notebook {
 
 <span class="n">prj_consts</span> <span class="o">=</span> <span class="n">azure_chestxray_utils</span><span class="o">.</span><span class="n">chestxray_consts</span><span class="p">()</span>
 
-<span class="n">data_base_input_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;..&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_INPUT_DIR_list</span><span class="p">)))</span>
-<span class="n">data_base_output_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;..&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_OUTPUT_DIR_list</span><span class="p">)))</span>  
+<span class="n">data_base_input_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_INPUT_DIR_list</span><span class="p">)))</span>
+<span class="n">data_base_output_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_OUTPUT_DIR_list</span><span class="p">)))</span>  
 
 <span class="n">data_base_input_dir</span>
 <span class="n">data_base_output_dir</span>
@@ -11970,26 +11970,26 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8&#39;</pre>
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/02_Model/../../../../data/chestxray/ChestX-ray8&#39;</pre>
 </div>
 
 </div>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/02_Model/../../chestxray/output&#39;</pre>
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/02_Model/../../../../data/chestxray/output&#39;</pre>
 </div>
 
 </div>
@@ -12000,7 +12000,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># chest xray images are in nih_chest_xray_data_dir</span>
@@ -12023,13 +12023,13 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/images&#39;</pre>
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/02_Model/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/images&#39;</pre>
 </div>
 
 </div>
@@ -12051,7 +12051,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check if we have patients file list Data_Entry_2017.csv and BBox_List_2017.csv (https://nihcc.app.box.com/v/ChestXray-NIHCC)</span>
@@ -12079,13 +12079,13 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[13]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/images/../..&#39;</pre>
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/02_Model/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/images/../..&#39;</pre>
 </div>
 
 </div>
@@ -12096,22 +12096,22 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/images/../../BBox_List_2017.csv
-/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/images/../../Data_Entry_2017.csv
-/local_dir/code/02_Model/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/images/../../blacklist.csv
+<pre>/local_dir/prj/AzureChestXRayNoAML/code/02_Model/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/images/../../BBox_List_2017.csv
+/local_dir/prj/AzureChestXRayNoAML/code/02_Model/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/images/../../Data_Entry_2017.csv
+/local_dir/prj/AzureChestXRayNoAML/code/02_Model/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/images/../../blacklist.csv
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[13]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/02_Model/../../chestxray/output/data_partitions&#39;</pre>
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/02_Model/../../../../data/chestxray/output/data_partitions&#39;</pre>
 </div>
 
 </div>
@@ -12122,7 +12122,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
@@ -12156,7 +12156,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># remove NIH manually annotated data (groung truth with heavy pathologies, no healthy patients) </span>
@@ -12223,7 +12223,7 @@ len of patient id with annotated data 984
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -12272,7 +12272,7 @@ train:21563 valid:3081 test:6161
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Add a few more project constants</span>
@@ -12297,7 +12297,7 @@ train:21563 valid:3081 test:6161
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">labels_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">other_data_dir</span><span class="p">,</span> <span class="n">NIH_patients_and_labels_file</span><span class="p">))</span>
@@ -12310,7 +12310,7 @@ train:21563 valid:3081 test:6161
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">current_df</span><span class="p">,</span> <span class="n">patient_ids</span><span class="p">):</span>
@@ -12341,7 +12341,7 @@ train:21563 valid:3081 test:6161
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># # create and save train/test/validation partitions list</span>
@@ -12387,21 +12387,7 @@ train:21563 valid:3081 test:6161
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 21563/21563 [00:32&lt;00:00, 657.29it/s]
-100%|██████████| 3081/3081 [00:04&lt;00:00, 674.78it/s]
-100%|██████████| 6161/6161 [00:12&lt;00:00, 495.70it/s]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>train, valid, test image number is: 68508 9495 32893
-</pre>
+<pre> 36%|███▋      | 7870/21563 [00:11&lt;00:19, 689.04it/s]</pre>
 </div>
 </div>
 
@@ -12411,7 +12397,7 @@ train:21563 valid:3081 test:6161
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sanity check, see train labels</span>
@@ -12424,72 +12410,16 @@ train:21563 valid:3081 test:6161
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[21]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>dict</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[21]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{&#39;00024303_000.png&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint8),
- &#39;00016035_000.png&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint8),
- &#39;00016035_001.png&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint8),
- &#39;00004967_000.png&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint8),
- &#39;00004967_001.png&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint8)}</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter nbconvert --to html 000_preprocess.ipynb
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[NbConvertApp] Converting notebook 000_preprocess.ipynb to html
-[NbConvertApp] Writing 290381 bytes to 000_preprocess.html
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 

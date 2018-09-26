@@ -11782,7 +11782,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Allow multiple displays per cell</span>
@@ -11798,7 +11798,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
@@ -11812,7 +11812,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># AZUREML_NATIVE_SHARE_DIRECTORY mapping to host dir is set by _nativeSharedDirectory_ in .compute file </span>
@@ -11821,7 +11821,7 @@ div#notebook {
 <span class="k">try</span><span class="p">:</span>
     <span class="n">amlWBSharedDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;AZUREML_NATIVE_SHARE_DIRECTORY&#39;</span><span class="p">]</span>    
 <span class="k">except</span><span class="p">:</span>
-    <span class="n">amlWBSharedDir</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;..&#39;</span><span class="p">])))</span>
+    <span class="n">amlWBSharedDir</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">])))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;not using AML Workbench?&#39;</span><span class="p">)</span>
     
 <span class="n">amlWBSharedDir</span>
@@ -11831,41 +11831,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>not using AML Workbench?
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[3]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/01_DataPrep/..&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use the Azure Machine Learning data collector to log various metrics</span>
@@ -11881,7 +11850,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use Azure Machine Learning history magic to control history collection</span>
@@ -11896,13 +11865,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import utlity functions</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">paths_to_append</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;src&#39;</span><span class="p">])))]</span>
+<span class="n">paths_to_append</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;src&#39;</span><span class="p">])))]</span>
 <span class="n">paths_to_append</span>
 <span class="k">def</span> <span class="nf">add_path_to_sys_path</span><span class="p">(</span><span class="n">path_to_append</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="n">path_to_append</span> <span class="ow">in</span> <span class="n">paths</span> <span class="k">for</span> <span class="n">paths</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)):</span>
@@ -11916,43 +11885,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[6]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;/local_dir/code/01_DataPrep/../src&#39;]</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[6]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[None]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create the file path variables </span>
@@ -11964,14 +11900,15 @@ div#notebook {
 <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
 
 
-<span class="n">data_base_input_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span> <span class="s1">&#39;..&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_INPUT_DIR_list</span><span class="p">)))</span>
-<span class="n">credential_info_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">CREDENTIALS_DIR_list</span><span class="p">)))</span>
+<span class="n">data_base_input_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amlWBSharedDir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">BASE_INPUT_DIR_list</span><span class="p">)))</span>
+<span class="n">credential_info_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">([</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">CREDENTIALS_DIR_list</span><span class="p">)))</span>
 <span class="n">nih_chest_xray_data_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_base_input_dir</span><span class="p">,</span> 
                                      <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">prj_consts</span><span class="o">.</span><span class="n">ChestXray_IMAGES_DIR_list</span><span class="p">)))</span>
 
 <span class="o">!</span>mkdir -p <span class="o">{</span>data_base_input_dir<span class="o">}</span>
 <span class="o">!</span>mkdir -p <span class="o">{</span>credential_info_path<span class="o">}</span>  
 <span class="o">!</span>mkdir -p <span class="o">{</span>nih_chest_xray_data_dir<span class="o">}</span>
+<span class="o">!</span>chmod -R <span class="nv">ugo</span><span class="o">=</span>rwx  <span class="o">{</span>data_base_input_dir<span class="o">}</span>
 
 <span class="n">data_base_input_dir</span>
 <span class="n">credential_info_path</span>
@@ -11982,69 +11919,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/01_DataPrep&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/01_DataPrep/../notShared&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create this function in file &#39;{credential_info_path}/get_data_access_secrets.py&#39;</span>
@@ -12058,7 +11936,7 @@ div#notebook {
     <span class="n">CredentialsFileName</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">credential_info_path</span><span class="p">,</span> <span class="s1">&#39;get_data_access_secrets.py&#39;</span><span class="p">)</span> 
     <span class="n">crt_container</span> <span class="o">=</span> <span class="s1">&#39;https://somedatastore.blob.core.windows.net/somecontainer&#39;</span>
     <span class="n">crt_source_Key</span> <span class="o">=</span> <span class="s1">&#39;some_key&#39;</span>
-
+    
     <span class="kn">import</span> <span class="nn">os.path</span> 
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">CredentialsFileName</span><span class="p">):</span> 
@@ -12083,30 +11961,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[8]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/01_DataPrep/../notShared/get_data_access_secrets.py&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># read credentials info</span>
@@ -12125,7 +11983,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#check azcopy is available. Uncomment second line to print _response_ if needed</span>
@@ -12138,38 +11996,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[10]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;azcopy 7.1.0-netcorepreview Copyright (c) 2017 Microsoft Corp. All Rights Reserved.&#39;,
- &#39;------------------------------------------------------------------------------&#39;,
- &#39;# azcopy is designed for high-performance uploading, downloading, and copying&#39;,
- &#39;data to and from Microsoft Azure Blob, and File storage.&#39;,
- &#39;&#39;,
- &#39;# Command Line Usage:&#39;,
- &#39;    azcopy --source &lt;source&gt; --destination &lt;destination&gt; [options]&#39;,
- &#39;&#39;,
- &#39;# Options:&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># copy data to local host dir</span>
@@ -12203,81 +12033,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>=[2018/09/24 04:58:08.217+00:00] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
-[2018/09/24 04:58:08.225+00:00][VERBOSE] Finished: 0 file(s), 0 B; Average Speed:0 B/s.
-[2018/09/24 04:58:08.225+00:00][VERBOSE] 7.1.0 : azcopy --quiet --source https://ghiordanchestxrbait02sa.blob.core.windows.net:443/chestxraydata --destination /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/.. --source-key ****** --verbose --include BBox_List_2017.csv
-[2018/09/24 04:58:08.295+00:00][VERBOSE] Attempt to parse address &#39;https://ghiordanchestxrbait02sa.blob.core.windows.net:443/chestxraydata&#39; to a directory as a candidate location succeeded.
-[2018/09/24 04:58:08.297+00:00][VERBOSE] Source is interpreted as a Cloud blob directory: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata.
-[2018/09/24 04:58:08.298+00:00][VERBOSE] Attempt to parse address &#39;/local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/..&#39; to a directory as a candidate location succeeded.
-[2018/09/24 04:58:08.300+00:00][VERBOSE] Destination is interpreted as a Local directory: /local_dir/chestxray/data/ChestX-ray8/.
-[2018/09/24 04:58:08.970+00:00][VERBOSE] Start transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/BBox_List_2017.csv =&gt; /local_dir/chestxray/data/ChestX-ray8/BBox_List_2017.csv
-[2018/09/24 04:58:09.367+00:00][VERBOSE] Finished transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/BBox_List_2017.csv =&gt; /local_dir/chestxray/data/ChestX-ray8/BBox_List_2017.csv
-                                                                               Finished 1 of total 1 file(s).
-                                                                               [2018/09/24 04:58:13.222+00:00][VERBOSE] Finished: 1 file(s), 90.25 KB; Average Speed:17.6 KB/s.
-[2018/09/24 04:58:11] Transfer summary:
------------------
-Total files transferred: 1
-Transfer successfully:   1
-Transfer skipped:        0
-Transfer failed:         0
-Elapsed time:            00.00:00:03
-=[2018/09/24 04:58:14.101+00:00] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
-[2018/09/24 04:58:14.108+00:00][VERBOSE] Finished: 0 file(s), 0 B; Average Speed:0 B/s.
-[2018/09/24 04:58:14.110+00:00][VERBOSE] 7.1.0 : azcopy --quiet --source https://ghiordanchestxrbait02sa.blob.core.windows.net:443/chestxraydata --destination /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/.. --source-key ****** --verbose --include Data_Entry_2017.csv
-[2018/09/24 04:58:14.180+00:00][VERBOSE] Attempt to parse address &#39;https://ghiordanchestxrbait02sa.blob.core.windows.net:443/chestxraydata&#39; to a directory as a candidate location succeeded.
-[2018/09/24 04:58:14.182+00:00][VERBOSE] Source is interpreted as a Cloud blob directory: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata.
-[2018/09/24 04:58:14.183+00:00][VERBOSE] Attempt to parse address &#39;/local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/..&#39; to a directory as a candidate location succeeded.
-[2018/09/24 04:58:14.185+00:00][VERBOSE] Destination is interpreted as a Local directory: /local_dir/chestxray/data/ChestX-ray8/.
-[2018/09/24 04:58:14.717+00:00][VERBOSE] Start transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/Data_Entry_2017.csv =&gt; /local_dir/chestxray/data/ChestX-ray8/Data_Entry_2017.csv
-[2018/09/24 04:58:15.576+00:00][VERBOSE] Finished transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/Data_Entry_2017.csv =&gt; /local_dir/chestxray/data/ChestX-ray8/Data_Entry_2017.csv
-                                                                               Finished 1 of total 1 file(s).
-                                                                               [2018/09/24 04:58:19.105+00:00][VERBOSE] Finished: 1 file(s), 7.497 MB; Average Speed:1.46 MB/s.
-[2018/09/24 04:58:17] Transfer summary:
------------------
-Total files transferred: 1
-Transfer successfully:   1
-Transfer skipped:        0
-Transfer failed:         0
-Elapsed time:            00.00:00:03
-=[2018/09/24 04:58:20.309+00:00] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
-[2018/09/24 04:58:20.317+00:00][VERBOSE] Finished: 0 file(s), 0 B; Average Speed:0 B/s.
-[2018/09/24 04:58:20.318+00:00][VERBOSE] 7.1.0 : azcopy --quiet --source https://ghiordanchestxrbait02sa.blob.core.windows.net:443/chestxraydata --destination /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/.. --source-key ****** --verbose --include blacklist.csv
-[2018/09/24 04:58:20.387+00:00][VERBOSE] Attempt to parse address &#39;https://ghiordanchestxrbait02sa.blob.core.windows.net:443/chestxraydata&#39; to a directory as a candidate location succeeded.
-[2018/09/24 04:58:20.389+00:00][VERBOSE] Source is interpreted as a Cloud blob directory: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata.
-[2018/09/24 04:58:20.390+00:00][VERBOSE] Attempt to parse address &#39;/local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/..&#39; to a directory as a candidate location succeeded.
-[2018/09/24 04:58:20.392+00:00][VERBOSE] Destination is interpreted as a Local directory: /local_dir/chestxray/data/ChestX-ray8/.
-[2018/09/24 04:58:20.933+00:00][VERBOSE] Start transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/blacklist.csv =&gt; /local_dir/chestxray/data/ChestX-ray8/blacklist.csv
-[2018/09/24 04:58:21.199+00:00][VERBOSE] Finished transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/blacklist.csv =&gt; /local_dir/chestxray/data/ChestX-ray8/blacklist.csv
-                                                                               Finished 1 of total 1 file(s).
-                                                                               [2018/09/24 04:58:23] Transfer summary:
------------------
-Total files transferred: 1
-Transfer successfully:   1
-Transfer skipped:        0
-Transfer failed:         0
-Elapsed time:            00.00:00:03
-[2018/09/24 04:58:25.312+00:00][VERBOSE] Finished: 1 file(s), 20.32 KB; Average Speed:3.97 KB/s.
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nih_chest_xray_data_dir</span><span class="p">,</span> <span class="s1">&#39;tmp&#39;</span><span class="p">)</span>
@@ -12289,30 +12048,10 @@ Elapsed time:            00.00:00:03
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[12]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer</span> <span class="o">=</span> <span class="o">!</span>azcopy --quiet <span class="err">\</span>
@@ -12329,20 +12068,9 @@ Elapsed time:            00.00:00:03
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The above cell will take about 20 minutes to run. While it runs, you can monitor the progress by ssh-ing 
- into your compute context machine and running:<br>
- find /datadrive01/amlwbShare/current_exp_account/current_workspace/current_exp/chestxray/data/ChestX-ray8/ChestXray-NIHCC/ -type f | wc -l</p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">:]</span>
@@ -12352,36 +12080,34 @@ Elapsed time:            00.00:00:03
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[14]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;[2018/09/24 05:00:01] Transfer summary:&#39;,
- &#39;-----------------&#39;,
- &#39;Total files transferred: 12&#39;,
- &#39;Transfer successfully:   12&#39;,
- &#39;Transfer skipped:        0&#39;,
- &#39;Transfer failed:         0&#39;,
- &#39;Elapsed time:            00.00:01:35&#39;]</pre>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The azcopy download process above will run for several minutes.</p>
+<p>Make sure you have these file sizes when it finishes:<br>
+total <strong>44023372</strong><br>
+-rw-r--r-- 1 1000 users <strong>2008470987</strong> Sep 26 17:19 images_001.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>3952623504</strong> Sep 26 19:05 images_002.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>3929234850</strong> Sep 26 17:22 images_003.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>3838903983</strong> Sep 26 17:25 images_004.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>3935496531</strong> Sep 26 17:22 images_005.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>3986301172</strong> Sep 26 17:25 images_006.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>4016328426</strong> Sep 26 19:05 images_007.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>4018347353</strong> Sep 26 19:05 images_008.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>4111327929</strong> Sep 26 19:05 images_009.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>4181556296</strong> Sep 26 19:05 images_010.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>4187084020</strong> Sep 26 19:05 images_011.tar.gz<br>
+-rw-r--r-- 1 1000 users <strong>2914187733</strong> Sep 26 17:21 images_012.tar.gz</p>
+<p>If the unzipping process below does not end up with <strong>112120</strong> .png images, you may need to repeat the download process for the above 12 .tar.gz files.</p>
 
 </div>
-
 </div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">nih_chest_xray_data_dir</span>
@@ -12394,71 +12120,16 @@ Elapsed time:            00.00:00:03
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[15]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[15]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>total 44023372
--rw-r--r-- 1 keras users 2008470987 Sep 24 04:59 images_001.tar.gz
--rw-r--r-- 1 keras users 3952623504 Sep 24 04:59 images_002.tar.gz
--rw-r--r-- 1 keras users 3929234850 Sep 24 04:59 images_003.tar.gz
--rw-r--r-- 1 keras users 3838903983 Sep 24 04:59 images_004.tar.gz
--rw-r--r-- 1 keras users 3935496531 Sep 24 04:59 images_005.tar.gz
--rw-r--r-- 1 keras users 3986301172 Sep 24 04:59 images_006.tar.gz
--rw-r--r-- 1 keras users 4016328426 Sep 24 05:00 images_007.tar.gz
--rw-r--r-- 1 keras users 4018347353 Sep 24 05:00 images_008.tar.gz
--rw-r--r-- 1 keras users 4111327929 Sep 24 05:00 images_009.tar.gz
--rw-r--r-- 1 keras users 4181556296 Sep 24 04:59 images_010.tar.gz
--rw-r--r-- 1 keras users 4187084020 Sep 24 05:00 images_011.tar.gz
--rw-r--r-- 1 keras users 2914187733 Sep 24 04:59 images_012.tar.gz
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The below cell will take about 20 minutes to run. While it runs, you can monitor the progress by ssh-ing 
+<p>The unzipping process below will run for several minutes.</p>
+<p>While it runs, you can monitor the progress by ssh-ing 
 into your compute context machine and running:<br>
-find ./AzureChestXRayNoAML/chestxray/data/ChestX-ray8/ChestXray-NIHCC/images/ -type f | wc -l<br>
-Final number of images is:<br>
+find /data/datadrive01/data/chestxray/ChestX-ray8/ChestXray-NIHCC/images/  -type f | wc -l</p>
+<p>The final number of images is:<br>
 <strong>112120</strong></p>
 
 </div>
@@ -12466,7 +12137,7 @@ Final number of images is:<br>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">nih_chest_xray_data_dir</span>
@@ -12474,7 +12145,7 @@ Final number of images is:<br>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">nih_chest_xray_data_dir</span><span class="p">)</span>
 <span class="o">!</span>pwd
 <span class="o">!</span>ls -l <span class="nv">$tmp_dir</span>/*.tar.gz 
-<span class="n">allImages</span> <span class="o">=</span> <span class="o">!</span> cat <span class="nv">$tmp_dir</span>/*.tar.gz <span class="p">|</span> tar -zxvf - -i
+<span class="n">allImages</span> <span class="o">=</span> <span class="o">!</span> cat <span class="nv">$tmp_dir</span>/*.tar.gz <span class="p">|</span> tar -zxf - -i
 <span class="c1"># !for file in $tmp_dir/*.tar.gz; do tar -zxf $file; done</span>
 </pre></div>
 
@@ -12482,79 +12153,32 @@ Final number of images is:<br>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[16]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>/local_dir/chestxray/data/ChestX-ray8/ChestXray-NIHCC
--rw-r--r-- 1 keras users 2008470987 Sep 24 04:59 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_001.tar.gz
--rw-r--r-- 1 keras users 3952623504 Sep 24 04:59 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_002.tar.gz
--rw-r--r-- 1 keras users 3929234850 Sep 24 04:59 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_003.tar.gz
--rw-r--r-- 1 keras users 3838903983 Sep 24 04:59 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_004.tar.gz
--rw-r--r-- 1 keras users 3935496531 Sep 24 04:59 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_005.tar.gz
--rw-r--r-- 1 keras users 3986301172 Sep 24 04:59 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_006.tar.gz
--rw-r--r-- 1 keras users 4016328426 Sep 24 05:00 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_007.tar.gz
--rw-r--r-- 1 keras users 4018347353 Sep 24 05:00 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_008.tar.gz
--rw-r--r-- 1 keras users 4111327929 Sep 24 05:00 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_009.tar.gz
--rw-r--r-- 1 keras users 4181556296 Sep 24 04:59 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_010.tar.gz
--rw-r--r-- 1 keras users 4187084020 Sep 24 05:00 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_011.tar.gz
--rw-r--r-- 1 keras users 2914187733 Sep 24 04:59 /local_dir/code/01_DataPrep/../../chestxray/data/ChestX-ray8/ChestXray-NIHCC/tmp/images_012.tar.gz
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">old_crt_dir</span><span class="p">)</span>
-<span class="o">!</span>jupyter nbconvert --to html 001_get_data.ipynb
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># os.chdir(nih_chest_xray_data_dir)</span>
+<span class="c1"># !pwd</span>
+<span class="c1"># !tar -zxvf $tmp_dir/images_001.tar.gz</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[NbConvertApp] Converting notebook 001_get_data.ipynb to html
-[NbConvertApp] Writing 287061 bytes to 001_get_data.html
-</pre>
 </div>
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">old_crt_dir</span><span class="p">)</span> 
+<span class="o">!</span>jupyter nbconvert --to html 001_get_data.ipynb
+</pre></div>
 
+</div>
 </div>
 </div>
 

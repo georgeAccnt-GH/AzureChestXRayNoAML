@@ -11771,6 +11771,16 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Leverage-Notebook-GUI-t-edit-.py-files-on-disk">Leverage Notebook GUI t edit .py files on disk<a class="anchor-link" href="#Leverage-Notebook-GUI-t-edit-.py-files-on-disk">&#182;</a></h3><p>Copyright (C) Microsoft Corporation.<br>
+see license file for details</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
@@ -11789,7 +11799,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pwd
@@ -11810,15 +11820,15 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>/local_dir
-total 424
--rwxrwxrwx 1  1003  1003  10022 Sep 23 23:13 001_get_data.ipynb
--rwxrwxrwx 1  1003  1003 386446 Sep 23 22:06 00_create_docker_image.html
--rwxrwxrwx 1  1003  1003  13549 Sep 23 22:37 00_create_docker_image.ipynb
-drwxr-xr-x 3 keras users   4096 Sep 23 23:12 chestxray
-drwxr-xr-x 3 keras users   4096 Sep 23 23:12 code
--rw-r--r-- 1 keras users     72 Sep 23 23:52 edit_python_files.ipynb
-drwxrwxrwx 3  1003  1003   4096 Sep 23 23:10 src
+<pre>/local_dir/prj/AzureChestXRayNoAML/code
+total 544
+-rwxrwxrwx 1 1003 1003 258730 Sep 26 16:59 00_create_docker_image.html
+-rwxrwxrwx 1 1003 1003  14886 Sep 26 16:59 00_create_docker_image.ipynb
+drwxrwxrwx 3 1003 1003   4096 Sep 26 17:01 01_DataPrep
+drwxrwxrwx 2 1003 1003   4096 Sep 26 16:56 02_Model
+-rwxrwxrwx 1 1003 1003 255403 Sep 26 16:56 edit_python_files.html
+-rwxrwxrwx 1 1003 1003   6610 Sep 26 17:04 edit_python_files.ipynb
+drwxrwxrwx 2 1003 1003   4096 Sep 26 16:56 src
 </pre>
 </div>
 </div>
@@ -11829,7 +11839,7 @@ drwxrwxrwx 3  1003  1003   4096 Sep 23 23:10 src
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">writefile</span> ./src/azure_chestxray_utils.py
@@ -11852,8 +11862,8 @@ class chestxray_consts(object):
     CHESTXRAY_MODEL_EXPECTED_IMAGE_HEIGHT  = 224
     CHESTXRAY_MODEL_EXPECTED_IMAGE_WIDTH = 224
 
-    BASE_INPUT_DIR_list = [&#39;chestxray&#39;, &#39;data&#39;, &#39;ChestX-ray8&#39;]
-    BASE_OUTPUT_DIR_list = [&#39;chestxray&#39;, &#39;output&#39;]
+    BASE_INPUT_DIR_list = [&#39;data&#39;, &#39;chestxray&#39;, &#39;ChestX-ray8&#39;]
+    BASE_OUTPUT_DIR_list = [&#39;data&#39;, &#39;chestxray&#39;, &#39;output&#39;]
     CREDENTIALS_DIR_list = [ &#39;notShared&#39;]
 
     SRC_DIR_list = [ &#39;src&#39;]
@@ -11949,13 +11959,32 @@ if __name__==&quot;__main__&quot;:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter nbconvert --to html edit_python_files.ipynb
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[NbConvertApp] Converting notebook edit_python_files.ipynb to html
+[NbConvertApp] Writing 255762 bytes to edit_python_files.html
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
