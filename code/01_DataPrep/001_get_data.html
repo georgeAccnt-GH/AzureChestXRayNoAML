@@ -11782,7 +11782,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Allow multiple displays per cell</span>
@@ -11798,7 +11798,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
@@ -11812,7 +11812,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># AZUREML_NATIVE_SHARE_DIRECTORY mapping to host dir is set by _nativeSharedDirectory_ in .compute file </span>
@@ -11831,10 +11831,41 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>not using AML Workbench?
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../..&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use the Azure Machine Learning data collector to log various metrics</span>
@@ -11850,7 +11881,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use Azure Machine Learning history magic to control history collection</span>
@@ -11865,7 +11896,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import utlity functions</span>
@@ -11885,10 +11916,43 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../src&#39;]</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[None]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create the file path variables </span>
@@ -11919,10 +11983,69 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep&#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../../data/chestxray/ChestX-ray8&#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../notShared&#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create this function in file &#39;{credential_info_path}/get_data_access_secrets.py&#39;</span>
@@ -11961,10 +12084,30 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../notShared/get_data_access_secrets.py&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># read credentials info</span>
@@ -11983,7 +12126,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#check azcopy is available. Uncomment second line to print _response_ if needed</span>
@@ -11996,10 +12139,38 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;azcopy 7.1.0-netcorepreview Copyright (c) 2017 Microsoft Corp. All Rights Reserved.&#39;,
+ &#39;------------------------------------------------------------------------------&#39;,
+ &#39;# azcopy is designed for high-performance uploading, downloading, and copying&#39;,
+ &#39;data to and from Microsoft Azure Blob, and File storage.&#39;,
+ &#39;&#39;,
+ &#39;# Command Line Usage:&#39;,
+ &#39;    azcopy --source &lt;source&gt; --destination &lt;destination&gt; [options]&#39;,
+ &#39;&#39;,
+ &#39;# Options:&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># copy data to local host dir</span>
@@ -12033,10 +12204,81 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>=[2018/10/17 07:31:51.195+00:00] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+[2018/10/17 07:31:51.202+00:00][VERBOSE] Finished: 0 file(s), 0 B; Average Speed:0 B/s.
+[2018/10/17 07:31:51.203+00:00][VERBOSE] 7.1.0 : azcopy --quiet --source https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata --destination /local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/.. --source-key ****** --verbose --include BBox_List_2017.csv
+[2018/10/17 07:31:51.269+00:00][VERBOSE] Attempt to parse address &#39;https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata&#39; to a directory as a candidate location succeeded.
+[2018/10/17 07:31:51.270+00:00][VERBOSE] Source is interpreted as a Cloud blob directory: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata.
+[2018/10/17 07:31:51.272+00:00][VERBOSE] Attempt to parse address &#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/..&#39; to a directory as a candidate location succeeded.
+[2018/10/17 07:31:51.273+00:00][VERBOSE] Destination is interpreted as a Local directory: /local_dir/data/chestxray/ChestX-ray8/.
+[2018/10/17 07:31:51.985+00:00][VERBOSE] Start transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/BBox_List_2017.csv =&gt; /local_dir/data/chestxray/ChestX-ray8/BBox_List_2017.csv
+[2018/10/17 07:31:52.619+00:00][VERBOSE] Finished transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/BBox_List_2017.csv =&gt; /local_dir/data/chestxray/ChestX-ray8/BBox_List_2017.csv
+                                                                               Finished 1 of total 1 file(s).
+                                                                               [2018/10/17 07:31:56.199+00:00][VERBOSE] Finished: 1 file(s), 90.25 KB; Average Speed:17.62 KB/s.
+[2018/10/17 07:31:54] Transfer summary:
+-----------------
+Total files transferred: 1
+Transfer successfully:   1
+Transfer skipped:        0
+Transfer failed:         0
+Elapsed time:            00.00:00:03
+=[2018/10/17 07:31:57.359+00:00] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+[2018/10/17 07:31:57.365+00:00][VERBOSE] Finished: 0 file(s), 0 B; Average Speed:0 B/s.
+[2018/10/17 07:31:57.366+00:00][VERBOSE] 7.1.0 : azcopy --quiet --source https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata --destination /local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/.. --source-key ****** --verbose --include Data_Entry_2017.csv
+[2018/10/17 07:31:57.433+00:00][VERBOSE] Attempt to parse address &#39;https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata&#39; to a directory as a candidate location succeeded.
+[2018/10/17 07:31:57.434+00:00][VERBOSE] Source is interpreted as a Cloud blob directory: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata.
+[2018/10/17 07:31:57.436+00:00][VERBOSE] Attempt to parse address &#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/..&#39; to a directory as a candidate location succeeded.
+[2018/10/17 07:31:57.437+00:00][VERBOSE] Destination is interpreted as a Local directory: /local_dir/data/chestxray/ChestX-ray8/.
+[2018/10/17 07:31:57.970+00:00][VERBOSE] Start transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/Data_Entry_2017.csv =&gt; /local_dir/data/chestxray/ChestX-ray8/Data_Entry_2017.csv
+[2018/10/17 07:31:59.042+00:00][VERBOSE] Finished transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/Data_Entry_2017.csv =&gt; /local_dir/data/chestxray/ChestX-ray8/Data_Entry_2017.csv
+                                                                               Finished 1 of total 1 file(s).
+                                                                               [2018/10/17 07:32:02.363+00:00][VERBOSE] Finished: 1 file(s), 7.497 MB; Average Speed:1.46 MB/s.
+[2018/10/17 07:32:01] Transfer summary:
+-----------------
+Total files transferred: 1
+Transfer successfully:   1
+Transfer skipped:        0
+Transfer failed:         0
+Elapsed time:            00.00:00:03
+=[2018/10/17 07:32:03.776+00:00] &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+[2018/10/17 07:32:03.782+00:00][VERBOSE] Finished: 0 file(s), 0 B; Average Speed:0 B/s.
+[2018/10/17 07:32:03.784+00:00][VERBOSE] 7.1.0 : azcopy --quiet --source https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata --destination /local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/.. --source-key ****** --verbose --include blacklist.csv
+[2018/10/17 07:32:03.851+00:00][VERBOSE] Attempt to parse address &#39;https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata&#39; to a directory as a candidate location succeeded.
+[2018/10/17 07:32:03.852+00:00][VERBOSE] Source is interpreted as a Cloud blob directory: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata.
+[2018/10/17 07:32:03.854+00:00][VERBOSE] Attempt to parse address &#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/..&#39; to a directory as a candidate location succeeded.
+[2018/10/17 07:32:03.855+00:00][VERBOSE] Destination is interpreted as a Local directory: /local_dir/data/chestxray/ChestX-ray8/.
+[2018/10/17 07:32:04.392+00:00][VERBOSE] Start transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/blacklist.csv =&gt; /local_dir/data/chestxray/ChestX-ray8/blacklist.csv
+[2018/10/17 07:32:04.729+00:00][VERBOSE] Finished transfer: https://ghiordanchestxrbait02sa.blob.core.windows.net/chestxraydata/blacklist.csv =&gt; /local_dir/data/chestxray/ChestX-ray8/blacklist.csv
+                                                                               Finished 1 of total 1 file(s).
+                                                                               [2018/10/17 07:32:08.778+00:00][VERBOSE] Finished: 1 file(s), 20.32 KB; Average Speed:3.97 KB/s.
+[2018/10/17 07:32:06] Transfer summary:
+-----------------
+Total files transferred: 1
+Transfer successfully:   1
+Transfer skipped:        0
+Transfer failed:         0
+Elapsed time:            00.00:00:03
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nih_chest_xray_data_dir</span><span class="p">,</span> <span class="s1">&#39;tmp&#39;</span><span class="p">)</span>
@@ -12045,6 +12287,26 @@ div#notebook {
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/local_dir/prj/AzureChestXRayNoAML/code/01_DataPrep/../../../../data/chestxray/ChestX-ray8/ChestXray-NIHCC/tmp&#39;</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -12142,6 +12404,7 @@ find /data/datadrive01/data/chestxray/ChestX-ray8/ChestXray-NIHCC/images/  -type
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">nih_chest_xray_data_dir</span>
 <span class="n">old_crt_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="o">!</span>ls -l ./../01_DataPrep/../../../../
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">nih_chest_xray_data_dir</span><span class="p">)</span>
 <span class="o">!</span>pwd
 <span class="o">!</span>ls -l <span class="nv">$tmp_dir</span>/*.tar.gz 
