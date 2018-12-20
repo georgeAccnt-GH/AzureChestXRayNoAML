@@ -86,7 +86,7 @@ nvidia-docker run -i -t -p 10003:8888 -v $(pwd):/local_dir:rw ...
 * You can run the above command in a new tmux session:
 ```
 tmux new -s jupyter_srvr_docker
-nvidia-docker run -i -t -p 10003:8888 -v $(pwd):/local_dir:rw georgedockeraccount/chestxray-no-aml-gpu:1.0.0 /bin/bash -c "/opt/conda/bin/jupyter notebook --notebook-dir=/local_dir --ip=* --port=8888 --no-browser --allow-root"
+sudo nvidia-docker run -i -t -p 10003:8888 -v $(pwd):/local_dir:rw georgedockeraccount/chestxray-no-aml-gpu:1.0.1 /bin/bash -c "/opt/conda/bin/jupyter notebook --notebook-dir=/local_dir --ip=* --port=8888 --no-browser --allow-root"
 ```
 * You can nonnect to the training dockerized Jupyter notebook server from your local machine by using the other port (e.g. __10003__ below) and the tocken reported by the server on the VM in the tmux session:
 ```
