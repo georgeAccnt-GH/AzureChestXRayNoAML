@@ -62,9 +62,16 @@ cd /data/datadrive01/
 tmux attach-session -t jupyter_srvr
 jupyter notebook --notebook-dir=$(pwd) --ip='*' --port=10002 --no-browser --allow-root
 ```
-* If you can not save notebooks, run this command to unblock write rigths to your directories:
+* If you can not save notebooks, run these commands to enable write rigths to your directories:
 ```
 sudo chmod -R ugo=rwx  /data/datadrive01/
+
+# to change directories' ownership
+sudo chown -R loginVM_001:loginVM_001 /data/datadrive01/prj/
+
+# to change files'  ownership
+sudo find . -type f  | xargs sudo chown loginVM_001:loginVM_001
+
 ```
 * You can nonnect to the base Jupyter notebook server from your local machine by using the appropriate port (e.g. __10002__ below) and the tocken reported by the server on the VM in the tmux session:
 ```
