@@ -1,0 +1,104 @@
+
+FROM nvidia/cuda:9.0-cudnn7-devel
+#FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+
+MAINTAINER George Iordanescu <ghiordan@microsoft.com>
+#based on https://github.com/keras-team/keras/blob/master/docker/Dockerfile
+
+# Install system packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      apt-utils \
+      bzip2 \
+      g++ \
+      git \
+      graphviz \
+      libgl1-mesa-glx \
+      libhdf5-dev \
+      openmpi-bin \
+      wget \
+      ssh \
+      rsync && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install conda
+ENV CONDA_DIR /opt/conda
+ENV PATH $CONDA_DIR/bin:$PATH
+
+RUN wget --quiet --no-check-certificate https://repo.continuum.io/miniconda/Miniconda3-4.2.12-Linux-x86_64.sh && \
+    echo "c59b3dd3cad550ac7596e0d599b91e75d88826db132e4146030ef471bb434e9a *Miniconda3-4.2.12-Linux-x86_64.sh" | sha256sum -c - && \
+    /bin/bash /Miniconda3-4.2.12-Linux-x86_64.sh -f -b -p $CONDA_DIR && \
+    rm Miniconda3-4.2.12-Linux-x86_64.sh && \
+    echo export PATH=$CONDA_DIR/bin:'$PATH' > /etc/profile.d/conda.sh 
+        
+#https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-linux
+# https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-linux#download-and-install-azcopy
+# https://www.microsoft.com/net/download/linux-package-manager/ubuntu16-04/runtime-2.1.2
+RUN wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && \ 
+    apt-get install  -y --no-install-recommends apt-transport-https && \
+    apt-get update && \
+    apt-get install  -y --no-install-recommends aspnetcore-runtime-2.1  && \
+    mkdir /tmp/azcopy && \
+    wget -O /tmp/azcopy/azcopy.tar.gz https://aka.ms/downloadazcopyprlinux &&  \
+    tar -xf /tmp/azcopy/azcopy.tar.gz -C /tmp/azcopy &&  \
+    /tmp/azcopy/install.sh && \
+    rm -rf /tmp/azcopy
+
+# Install Python packages and keras
+# ENV NB_USER keras
+# ENV NB_UID 1000
+
+# RUN useradd -m -s /bin/bash -N -u $NB_UID $NB_USER && \
+#     chown $NB_USER $CONDA_DIR -R && \
+#     mkdir -p /src && \
+#     chown $NB_USER /src
+
+# USER $NB_USER
+RUN mkdir -p /sr
+
+ARG python_version=3.6
+
+# TF 1.13:cuda 10.0, cudnn 7 
+RUN conda install -y python=${python_version} && \
+    pip install --upgrade pip && \
+    pip install \
+      sklearn_pandas \
+      scikit-image \
+      tensorflow-gpu==1.12.2 \
+      tensorflow-tensorboard \
+      matplotlib \
+      numpy && \
+    conda install \
+      bcolz \
+      h5py \
+      matplotlib \
+      mkl \
+      nose \
+      notebook=5.6.0 \
+      opencv \
+      Pillow \
+      pandas \
+      pydot \
+      pygpu \
+      pyyaml \
+      requests \
+      scikit-learn \
+      six \
+      tqdm \
+      pytorch torchvision cudatoolkit=9.0 -c pytorch && \
+    conda install -c conda-forge imageio && \
+    git clone git://github.com/keras-team/keras.git /src && pip install -e /src[tests] && \
+    pip install git+git://github.com/keras-team/keras.git && \
+    pip install git+https://github.com/aleju/imgaug && \
+    pip install git+https://www.github.com/keras-team/keras-contrib.git && \
+    conda clean -yt     
+
+#ADD theanorc /home/keras/.theanorc
+
+ENV PYTHONPATH='/src/:$PYTHONPATH'
+
+WORKDIR /src
+
+EXPOSE 8888
+
+# CMD jupyter notebook --port=8888 --ip=0.0.0.0
