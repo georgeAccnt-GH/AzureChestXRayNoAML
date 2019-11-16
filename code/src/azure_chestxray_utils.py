@@ -17,8 +17,8 @@ class chestxray_consts(object):
     CHESTXRAY_MODEL_EXPECTED_IMAGE_HEIGHT  = 224
     CHESTXRAY_MODEL_EXPECTED_IMAGE_WIDTH = 224
 
-    BASE_INPUT_DIR_list = ['data', 'chestxray', 'ChestX-ray8']
-    BASE_OUTPUT_DIR_list = ['data', 'chestxray', 'output']
+    BASE_INPUT_DIR_list = ['data_dir', 'chestxray', 'ChestX-ray8']
+    BASE_OUTPUT_DIR_list = ['data_dir', 'chestxray', 'output']
     CREDENTIALS_DIR_list = [ 'notShared']
 
     SRC_DIR_list = [ 'src']

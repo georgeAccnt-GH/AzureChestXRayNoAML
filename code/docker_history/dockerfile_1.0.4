@@ -1,0 +1,134 @@
+
+FROM nvidia/cuda:10.0-cudnn7-devel
+# FROM nvidia/cuda:9.2-cudnn7-devel
+#FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+
+MAINTAINER George Iordanescu <ghiordan@microsoft.com>
+#based on https://github.com/keras-team/keras/blob/master/docker/Dockerfile
+
+# Install system packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      apt-utils \
+      bzip2 \
+      g++ \
+      git \
+      graphviz \
+      libgl1-mesa-glx \
+      libhdf5-dev \
+      openmpi-bin \
+      wget \
+      ssh \
+      rsync && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install conda
+ENV CONDA_DIR /opt/conda
+ENV PATH $CONDA_DIR/bin:$PATH
+
+RUN wget --quiet --no-check-certificate https://repo.continuum.io/miniconda/Miniconda3-4.2.12-Linux-x86_64.sh && \
+    echo "c59b3dd3cad550ac7596e0d599b91e75d88826db132e4146030ef471bb434e9a *Miniconda3-4.2.12-Linux-x86_64.sh" | sha256sum -c - && \
+    /bin/bash /Miniconda3-4.2.12-Linux-x86_64.sh -f -b -p $CONDA_DIR && \
+    rm Miniconda3-4.2.12-Linux-x86_64.sh && \
+    echo export PATH=$CONDA_DIR/bin:'$PATH' > /etc/profile.d/conda.sh        
+
+# Install AzCopy        
+RUN mkdir -p /tmp/azcopy && mkdir -p /azcopy10 && \
+    wget -O /tmp/azcopy/azcopyv10.tar.gz https://aka.ms/downloadazcopy-v10-linux &&  \
+    tar -xf /tmp/azcopy/azcopyv10.tar.gz -C /azcopy10 
+RUN rm -rf /tmp/azcopy
+ENV PATH=/azcopy10/azcopy_linux_amd64_10.3.2:$PATH
+
+# Install Python packages and keras
+# ENV NB_USER keras
+# ENV NB_UID 1000
+
+# RUN useradd -m -s /bin/bash -N -u $NB_UID $NB_USER && \
+#     chown $NB_USER $CONDA_DIR -R && \
+#     mkdir -p /src && \
+#     chown $NB_USER /src
+
+# USER $NB_USER
+RUN mkdir -p /sr
+
+ARG python_version=3.6
+
+RUN conda config --append channels conda-forge
+RUN conda install -y python=${python_version} && \
+    pip install --upgrade pip && \
+    pip install \
+      sklearn_pandas \
+      tensorflow-gpu==1.14 \
+      python-dotenv \
+      papermill[azure] &&  \
+    conda install \
+      bcolz \
+      h5py \
+      imageio \
+      matplotlib \
+      mkl \
+      numpy \
+      nose \
+      notebook \
+      opencv \
+      Pillow \
+      pandas \
+      pydot \
+      pygpu \
+      pyyaml \
+      scikit-learn \
+      scikit-image \
+      six \
+      theano \
+      mkdocs \
+      tqdm \
+      && \
+    conda install pytorch torchvision cudatoolkit=9.2 -c pytorch && \
+    git clone git://github.com/keras-team/keras.git /src && pip install -e /src[tests] && \
+    pip install git+git://github.com/keras-team/keras.git && \
+    pip install git+https://github.com/aleju/imgaug && \
+    conda clean -yt
+
+# TF 1.13:cuda 10.0, cudnn 7 
+# RUN conda install -y python=${python_version} && \
+#     pip install --upgrade pip && \
+#     pip install \
+#       sklearn_pandas \
+#       scikit-image \
+#       tensorflow-gpu==1.14 \
+#       tensorflow-tensorboard \
+#       matplotlib \
+#       numpy && \
+#     conda install \
+#       bcolz \
+#       h5py \
+#       matplotlib \
+#       mkl \
+#       nose \
+#       notebook \
+#       opencv \
+#       Pillow \
+#       pandas \
+#       pydot \
+#       pygpu \
+#       pyyaml \
+#       requests \
+#       scikit-learn \
+#       six \
+#       tqdm \
+#       pytorch torchvision cudatoolkit=9.0 -c pytorch && \
+#     conda install -c conda-forge imageio && \
+#     git clone git://github.com/keras-team/keras.git /src && pip install -e /src[tests] && \
+#     pip install git+git://github.com/keras-team/keras.git && \
+#     pip install git+https://github.com/aleju/imgaug && \
+#     pip install git+https://www.github.com/keras-team/keras-contrib.git && \
+#     conda clean -yt     
+
+#ADD theanorc /home/keras/.theanorc
+
+ENV PYTHONPATH='/src/:$PYTHONPATH'
+
+WORKDIR /src
+
+EXPOSE 8888
+
+# CMD jupyter notebook --port=8888 --ip=0.0.0.0
