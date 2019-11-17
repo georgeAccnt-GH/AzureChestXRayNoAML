@@ -86,6 +86,7 @@ RUN conda install -y python=${python_version} && \
     git clone git://github.com/keras-team/keras.git /src && pip install -e /src[tests] && \
     pip install git+git://github.com/keras-team/keras.git && \
     pip install git+https://github.com/aleju/imgaug && \
+    pip install git+https://www.github.com/keras-team/keras-contrib.git && \
     conda clean -yt
 
 # TF 1.13:cuda 10.0, cudnn 7 
