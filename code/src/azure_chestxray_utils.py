@@ -87,3 +87,4 @@ if __name__=="__main__":
     # crt_pathology_image_file_names = crt_bbox_data.get_patologies_images(list([ 'Nodule'])) # ['Cardiomegaly', 'Infiltrate']
     # print(crt_pathology_image_file_names[:5])
     # print(crt_pathology_image_file_names.shape)
+
